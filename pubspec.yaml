@@ -19,6 +19,7 @@ dependencies:
   flutter_native_splash:
   readmore:
   smooth_page_indicator:
+  google_fonts: ^8.2.1
 
 dev_dependencies:
   flutter_test:

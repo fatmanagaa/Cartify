@@ -2,7 +2,7 @@ import 'package:ecommerce_app/core/resources/values_manager.dart';
 import 'package:ecommerce_app/features/products_screen/presentation/widgets/custom_product_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/resources/app_assets.dart';
 import '../../../../core/widget/home_screen_app_bar.dart';
 
 class ProductsScreen extends StatelessWidget {

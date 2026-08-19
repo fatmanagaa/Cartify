@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routes_manager/route_generator.dart';
+import 'core/utils/app_theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -19,6 +20,7 @@ class MainApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.mainTheme,
         home: child,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.signInRoute,

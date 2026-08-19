@@ -1,6 +1,6 @@
 import 'package:colornames/colornames.dart';
-import 'package:ecommerce_app/core/resources/color_manager.dart';
-import 'package:ecommerce_app/core/resources/styles_manager.dart';
+import 'package:ecommerce_app/core/resources/app_colors.dart';
+import 'package:ecommerce_app/core/resources/app_styles.dart';
 import 'package:ecommerce_app/core/resources/values_manager.dart';
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/widgets/custom_txt_widget.dart';
 import 'package:flutter/cupertino.dart';

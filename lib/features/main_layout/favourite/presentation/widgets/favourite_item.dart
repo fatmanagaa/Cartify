@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/core/resources/color_manager.dart';
+import 'package:ecommerce_app/core/resources/app_colors.dart';
 import 'package:ecommerce_app/core/resources/constants_manager.dart';
 import 'package:ecommerce_app/core/resources/values_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';

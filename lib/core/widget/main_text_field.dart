@@ -1,11 +1,11 @@
-import 'package:ecommerce_app/core/resources/assets_manager.dart';
+import 'package:ecommerce_app/core/resources/app_assets.dart';
 import 'package:ecommerce_app/core/resources/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../resources/color_manager.dart';
-import '../resources/styles_manager.dart';
+import '../resources/app_colors.dart';
+import '../resources/app_styles.dart';
 import '../resources/values_manager.dart';
 
 class BuildTextField extends StatefulWidget {
