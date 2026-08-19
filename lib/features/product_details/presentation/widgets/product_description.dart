@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 
-import '../../../../core/resources/app_colors.dart';
-import '../../../../core/resources/app_styles.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({super.key , required this.productDescription});
@@ -25,7 +25,7 @@ class ProductDescription extends StatelessWidget {
         ReadMoreText(
         productDescription,
           style: getMediumStyle(
-              color: ColorManager.appBarTitleColor.withOpacity(.6))
+              color: ColorManager.appBarTitleColor.withValues(alpha: .6))
               .copyWith(fontSize: 18.sp),
           trimExpandedText: ' Read Less',
           trimCollapsedText: ' Read More',

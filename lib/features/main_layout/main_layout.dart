@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/widget/home_screen_app_bar.dart';
-import 'package:ecommerce_app/features/main_layout/categories/presentation/categories_tab.dart';
-import 'package:ecommerce_app/features/main_layout/favourite/presentation/favourite_screen.dart';
-import 'package:ecommerce_app/features/main_layout/profile_tab/presentation/profile_tab.dart';
+import '../../core/utils/app_assets.dart';
+import '../../core/utils/app_colors.dart';
+import '../../core/widget/home_screen_app_bar.dart';
+import 'categories/presentation/categories_tab.dart';
+import 'favourite/presentation/favourite_screen.dart';
+import 'profile_tab/presentation/profile_tab.dart';
 import 'package:flutter/material.dart';
 
 import 'home/presentation/home_tab.dart';

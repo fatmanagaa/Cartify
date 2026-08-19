@@ -1,7 +1,8 @@
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_styles.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final Widget? prefixIcon;
@@ -46,8 +47,7 @@ class CustomElevatedButton extends StatelessWidget {
             Text(
               label,
               style: textStyle ??
-                  getMediumStyle(color: ColorManager.white)
-                      .copyWith(fontSize: 20.sp),
+                  AppStyles.medium20White,
             ),
             SizedBox(
               width: 27.w,

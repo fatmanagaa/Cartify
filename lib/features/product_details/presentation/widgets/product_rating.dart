@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
+import 'package:ecommerce_app/core/utils/app_assets.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/widget/product_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +18,7 @@ class ProductRating extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             border: Border.all(
-                color: ColorManager.primary.withOpacity(.3),
+                color: ColorManager.primary.withValues(alpha: .3),
                 width: 1),
             borderRadius: BorderRadius.circular(20.r),
           ),

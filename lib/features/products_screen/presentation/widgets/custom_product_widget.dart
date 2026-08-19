@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
 
 class CustomProductWidget extends StatelessWidget {
   final double width;

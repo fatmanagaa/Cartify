@@ -37,6 +37,14 @@ TextStyle getSemiBoldStyle({double fontSize = 12, required Color color}) {
   return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
 }
 
+TextStyle getTextWithLine() {
+  return GoogleFonts.poppins(
+    fontSize: 12.sp,
+    color: ColorManager.primary.withValues(alpha: 0.6),
+    decoration: TextDecoration.lineThrough,
+  );
+}
+
 class AppStyles {
   static TextStyle medium20White = getMediumStyle(
     fontSize: 20,

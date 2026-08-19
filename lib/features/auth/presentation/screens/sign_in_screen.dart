@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import 'package:ecommerce_app/core/utils/app_assets.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/values_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/core/widget/main_text_field.dart';
@@ -9,10 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/app_styles.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/values_manager.dart';
+import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/app_styles.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});

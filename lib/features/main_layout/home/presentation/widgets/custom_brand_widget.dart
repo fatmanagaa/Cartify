@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
+import '../../../../../core/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,7 +10,7 @@ class CustomBrandWidget extends StatelessWidget {
     return Column(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(100.r),
+          borderRadius: BorderRadius.circular(100),
           child: Container(
             height: 100.h,
             width: 100.w,
@@ -19,7 +19,7 @@ class CustomBrandWidget extends StatelessWidget {
             ),
             child: Image.asset(
               ImageAssets.brandHomeImage,
-              fit: BoxFit.scaleDown,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -27,26 +27,3 @@ class CustomBrandWidget extends StatelessWidget {
     );
   }
 }
-
-
-        // CachedNetworkImage(
-        //   height: 80,
-        //   width: 80,
-        //   fit: BoxFit.cover,
-        //   imageUrl: ImageAssets.categoryHomeImage,
-        //   placeholder: (context, url) =>
-        //       const Center(child: CircularProgressIndicator()),
-        //   errorWidget: (context, url, error) =>
-        //       const Center(child: Icon(Icons.error)),
-        //   imageBuilder: (context, imageProvider) {
-        //     return Container(
-        //       decoration: BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         image: DecorationImage(
-        //           image: imageProvider,
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),

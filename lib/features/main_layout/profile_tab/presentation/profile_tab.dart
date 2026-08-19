@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/font_manager.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/font_manager.dart';
+import '../../../../core/utils/app_styles.dart';
+import '../../../../core/utils/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,12 +50,12 @@ class ProfileTabState extends State<ProfileTab> {
               Text(
                 'mohamed.N@gmail.com',
                 style: getRegularStyle(
-                    color: ColorManager.primary.withOpacity(.5),
+                    color: ColorManager.primary.withValues(alpha: .5),
                     fontSize: FontSize.s14),
               ),
               SizedBox(height: AppSize.s18.h),
               BuildTextField(
-                borderBackgroundColor: ColorManager.primary.withOpacity(.5),
+                borderBackgroundColor: ColorManager.primary.withValues(alpha: .5),
                 readOnly: isFullNameReadOnly,
                 backgroundColor: ColorManager.white,
                 hint: 'Enter your full name',
@@ -79,7 +79,7 @@ class ProfileTabState extends State<ProfileTab> {
               ),
               SizedBox(height: AppSize.s18.h),
               BuildTextField(
-                borderBackgroundColor: ColorManager.primary.withOpacity(.5),
+                borderBackgroundColor: ColorManager.primary.withValues(alpha: .5),
                 readOnly: isEmailReadOnly,
                 backgroundColor: ColorManager.white,
                 hint: 'Enter your email address',
@@ -108,7 +108,7 @@ class ProfileTabState extends State<ProfileTab> {
                   });
                 },
                 controller: TextEditingController(text: '123456789123456'),
-                borderBackgroundColor: ColorManager.primary.withOpacity(.5),
+                borderBackgroundColor: ColorManager.primary.withValues(alpha: .5),
                 readOnly: isPasswordReadOnly,
                 backgroundColor: ColorManager.white,
                 hint: 'Enter your password',
@@ -116,7 +116,14 @@ class ProfileTabState extends State<ProfileTab> {
                 isObscured: true,
                 labelTextStyle: getMediumStyle(
                     color: ColorManager.primary, fontSize: FontSize.s18),
-                suffixIcon: SvgPicture.asset(SvgAssets.edit),
+                suffixIcon: IconButton(
+                  icon: SvgPicture.asset(SvgAssets.edit),
+                  onPressed: () {
+                    setState(() {
+                      isPasswordReadOnly = false;
+                    });
+                  },
+                ),
                 textInputType: TextInputType.text,
                 validation: AppValidators.validatePassword,
                 hintTextStyle: getRegularStyle(color: ColorManager.primary)
@@ -125,7 +132,7 @@ class ProfileTabState extends State<ProfileTab> {
               SizedBox(height: AppSize.s18.h),
               BuildTextField(
                 controller: TextEditingController(text: '01122118855'),
-                borderBackgroundColor: ColorManager.primary.withOpacity(.5),
+                borderBackgroundColor: ColorManager.primary.withValues(alpha: .5),
                 readOnly: isMobileNumberReadOnly,
                 backgroundColor: ColorManager.white,
                 hint: 'Enter your mobile no.',
@@ -149,7 +156,7 @@ class ProfileTabState extends State<ProfileTab> {
               BuildTextField(
                 controller:
                     TextEditingController(text: '6th October, street 11.....'),
-                borderBackgroundColor: ColorManager.primary.withOpacity(.5),
+                borderBackgroundColor: ColorManager.primary.withValues(alpha: .5),
                 readOnly: isAddressReadOnly,
                 backgroundColor: ColorManager.white,
                 hint: '6th October, street 11.....',

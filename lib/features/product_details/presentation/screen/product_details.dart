@@ -1,6 +1,4 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
+import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/features/product_details/presentation/widgets/product_color.dart';
 import 'package:ecommerce_app/features/product_details/presentation/widgets/product_description.dart';
@@ -11,6 +9,9 @@ import 'package:ecommerce_app/features/product_details/presentation/widgets/prod
 import 'package:ecommerce_app/features/product_details/presentation/widgets/product_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_styles.dart';
 
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
@@ -101,7 +102,7 @@ class ProductDetails extends StatelessWidget {
                     Text(
                       'Total price',
                       style: getMediumStyle(
-                              color: ColorManager.primary.withOpacity(.6))
+                              color: ColorManager.primary.withValues(alpha: .6))
                           .copyWith(fontSize: 18.sp),
                     ),
                     SizedBox(

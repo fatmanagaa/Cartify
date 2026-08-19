@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/constants_manager.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/constants_manager.dart';
+import 'package:ecommerce_app/core/utils/values_manager.dart';
 import 'package:ecommerce_app/core/routes_manager/routes.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/widgets/add_to_cart_button.dart';
@@ -23,7 +23,7 @@ class FavoriteItem extends StatelessWidget {
         padding: EdgeInsets.only(right: AppSize.s8.w),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s16.r),
-            border: Border.all(color: ColorManager.primary.withOpacity(.3))),
+            border: Border.all(color: ColorManager.primary.withValues(alpha: .3))),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -31,7 +31,7 @@ class FavoriteItem extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppSize.s16.r),
                   border:
-                      Border.all(color: ColorManager.primary.withOpacity(.6))),
+                      Border.all(color: ColorManager.primary.withValues(alpha: .6))),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s16.r),
                 child: CachedNetworkImage(

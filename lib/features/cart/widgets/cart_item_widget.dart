@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
-import 'package:ecommerce_app/core/routes_manager/routes.dart';
-import 'package:ecommerce_app/core/widget/product_counter.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_styles.dart';
+import '../../../core/utils/values_manager.dart';
+import '../../../core/routes_manager/routes.dart';
+import '../../../core/widget/product_counter.dart';
 import 'package:ecommerce_app/features/cart/widgets/color_and_size_cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +44,7 @@ class CartItemWidget extends StatelessWidget {
         height: isPortrait ? height * 0.14 : width * 0.23,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(color: ColorManager.primary.withOpacity(0.3)),
+          border: Border.all(color: ColorManager.primary.withValues(alpha: 0.3)),
         ),
         child: Row(children: [
           // display image in the container
@@ -52,7 +52,7 @@ class CartItemWidget extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.r),
-              border: Border.all(color: ColorManager.primary.withOpacity(0.3)),
+              border: Border.all(color: ColorManager.primary.withValues(alpha: 0.3)),
             ),
             child: Image.asset(
               imagePath,

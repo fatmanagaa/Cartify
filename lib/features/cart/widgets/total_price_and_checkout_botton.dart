@@ -1,7 +1,7 @@
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
-import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
+import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/app_styles.dart';
+import '../../../core/utils/values_manager.dart';
+import '../../../core/widget/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -23,7 +23,7 @@ class TotalPriceAndCheckoutBotton extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: getMediumStyle(
-                color: ColorManager.textColor.withOpacity(0.6),
+                color: ColorManager.textColor.withValues(alpha: 0.6),
                 fontSize: AppSize.s18.sp,
               ),
             ),

@@ -1,6 +1,7 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
 
 class HeartButton extends StatefulWidget {
   final void Function()? onTap;

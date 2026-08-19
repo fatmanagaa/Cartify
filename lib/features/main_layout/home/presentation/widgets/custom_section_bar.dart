@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import '../../../../../core/utils/values_manager.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/resources/app_colors.dart';
-import '../../../../../core/resources/app_styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSectionBar extends StatelessWidget {
   final String sectionNname;
@@ -20,8 +20,8 @@ class CustomSectionBar extends StatelessWidget {
           Text(
             sectionNname,
             style: getMediumStyle(
-              fontSize: 18,
               color: ColorManager.darkBlue,
+              fontSize: 18.sp,
             ),
           ),
           TextButton(
@@ -30,7 +30,10 @@ class CustomSectionBar extends StatelessWidget {
             },
             child: Text(
               'view all',
-              style: getMediumStyle(color: ColorManager.darkBlue),
+              style: getMediumStyle(
+                color: ColorManager.darkBlue,
+                fontSize: 12.sp,
+              ),
             ),
           ),
         ],

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/resources/app_assets.dart';
-import '../../../../core/resources/app_colors.dart';
-import '../../../../core/resources/app_styles.dart';
-import '../../../../core/resources/values_manager.dart';
+import 'package:ecommerce_app/core/utils/app_assets.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/core/utils/values_manager.dart';
 import '../../../../core/widget/main_text_field.dart';
 import '../../../../core/widget/validators.dart';
 

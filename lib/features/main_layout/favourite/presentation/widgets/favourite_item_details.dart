@@ -1,7 +1,7 @@
 import 'package:colornames/colornames.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
-import 'package:ecommerce_app/core/resources/values_manager.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/core/utils/values_manager.dart';
 import 'package:ecommerce_app/features/main_layout/favourite/presentation/widgets/custom_txt_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,12 +63,12 @@ class FavouriteItemDetails extends StatelessWidget {
                             data: 'EGP ${product["salePrice"]}',
                             textStyle: getMediumStyle(
                                     color: ColorManager.appBarTitleColor
-                                        .withOpacity(.6))
+                                        .withValues(alpha: .6))
                                 .copyWith(
                                     letterSpacing: 0.17,
                                     decoration: TextDecoration.lineThrough,
                                     color: ColorManager.appBarTitleColor
-                                        .withOpacity(.6),
+                                        .withValues(alpha: .6),
                                     fontSize: AppSize.s10.sp)),
                       ],
                     ),

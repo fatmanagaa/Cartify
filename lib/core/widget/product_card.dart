@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
+import '../utils/app_assets.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
           color: Colors.white,
           border: Border.all(
             width: 1,
-            color: ColorManager.primary.withOpacity(0.8),
+            color: ColorManager.primary.withValues(alpha: 0.8),
           ),
         ),
         child: Column(
@@ -103,7 +103,7 @@ class ProductCard extends StatelessWidget {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withValues(alpha: 0.2),
                             spreadRadius: 2,
                             blurRadius: 4,
                             offset: const Offset(0, 2),

@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/core/resources/app_assets.dart';
-import 'package:ecommerce_app/core/resources/app_colors.dart';
-import 'package:ecommerce_app/core/resources/app_styles.dart';
+import '../../../../../core/utils/app_assets.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,30 +11,8 @@ class CustomCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // CachedNetworkImage(
-        //   height: 100,
-        //   width: 100,
-        //   fit: BoxFit.cover,
-        //   imageUrl: ImageAssets.categoryHomeImage,
-        //   placeholder: (context, url) =>
-        //       const Center(child: CircularProgressIndicator()),
-        //   errorWidget: (context, url, error) =>
-        //       const Center(child: Icon(Icons.error)),
-        //   imageBuilder: (context, imageProvider) {
-        //     return Container(
-        //       decoration: BoxDecoration(
-        //         shape: BoxShape.circle,
-        //         image: DecorationImage(
-        //           image: imageProvider,
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),
-
         ClipRRect(
-          borderRadius: BorderRadius.circular(100.r),
+          borderRadius: BorderRadius.circular(100),
           child: Container(
             height: 100.h,
             width: 100.w,
@@ -49,7 +27,7 @@ class CustomCategoryWidget extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Text(
-          "men's fashion",
+          "Laptops",
           style: getRegularStyle(color: ColorManager.darkBlue, fontSize: 14.sp),
         ),
       ],
