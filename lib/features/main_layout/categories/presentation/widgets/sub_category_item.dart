@@ -1,8 +1,9 @@
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
-import 'package:ecommerce_app/core/routes_manager/routes.dart';
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SubCategoryItem extends StatelessWidget {
   final String title;
@@ -13,7 +14,7 @@ class SubCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.productsScreenRoute),
+      onTap: () => context.pushNamed(Routes.productsScreenRouteName),
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,13 +1,14 @@
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
-import 'package:ecommerce_app/core/routes_manager/routes.dart';
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/core/widget/main_text_field.dart';
 import 'package:ecommerce_app/core/widget/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/app_styles.dart';
@@ -29,7 +30,7 @@ class SignInScreen extends StatelessWidget {
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
-                Center(child: SvgPicture.asset(SvgAssets.routeLogo)),
+                Center(child: Image.asset(ImageAssets.Logo)),
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
@@ -93,8 +94,7 @@ class SignInScreen extends StatelessWidget {
                       textStyle: getBoldStyle(
                           color: ColorManager.primary, fontSize: AppSize.s18),
                       onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, Routes.mainRoute, (route) => false);
+                        context.goNamed(Routes.mainRouteName);
                       },
                     ),
                   ),
@@ -114,8 +114,7 @@ class SignInScreen extends StatelessWidget {
                       width: AppSize.s8.w,
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, Routes.signUpRoute),
+                      onTap: () => context.goNamed(Routes.signUpRouteName),
                       child: Text(
                         'Create Account',
                         style: getSemiBoldStyle(color: ColorManager.white)

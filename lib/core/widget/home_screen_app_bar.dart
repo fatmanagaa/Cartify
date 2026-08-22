@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
-import '../routes_manager/routes.dart';
+import '../routes_manager/app_routes.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_styles.dart';
@@ -10,14 +11,14 @@ import '../utils/font_manager.dart';
 import '../utils/values_manager.dart';
 
 class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
- final bool? automaticallyImplyLeading;
+  final bool? automaticallyImplyLeading;
   const HomeScreenAppBar({super.key, this.automaticallyImplyLeading});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       surfaceTintColor: Colors.white,
-      automaticallyImplyLeading: automaticallyImplyLeading??false,
+      automaticallyImplyLeading: automaticallyImplyLeading ?? false,
       title: SvgPicture.asset(
         SvgAssets.routeLogo,
         height: 25.h,
@@ -71,8 +72,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 IconButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, Routes.cartRoute),
+                    onPressed: () => context.pushNamed(Routes.cartRouteName),
                     icon: ImageIcon(
                       AssetImage(IconsAssets.icCart),
                       color: ColorManager.primary,

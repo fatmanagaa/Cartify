@@ -14,7 +14,9 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({super.key, this.product});
+
+  final Map<String, dynamic>? product;
 
   @override
   Widget build(BuildContext context) {
