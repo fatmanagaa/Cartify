@@ -27,9 +27,6 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: AppSize.s40.h,
-                ),
                 Center(child: Image.asset(ImageAssets.Logo)),
                 SizedBox(
                   height: AppSize.s40.h,
