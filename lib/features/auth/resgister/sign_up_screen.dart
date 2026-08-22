@@ -24,10 +24,7 @@ class SignUpScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: AppSize.s40.h,
-                ),
-                Center(child: SvgPicture.asset(SvgAssets.routeLogo)),
+                Center(child: Image.asset(ImageAssets.Logo)),
                 SizedBox(
                   height: AppSize.s40.h,
                 ),
