@@ -15,7 +15,7 @@ abstract class AppRouter {
       GoRoute(
         name: Routes.signInRouteName,
         path: Routes.signInRoute,
-        builder: (context, state) => const SignInScreen(),
+        builder: (context, state) => SignInScreen(),
       ),
       GoRoute(
         name: Routes.signUpRouteName,

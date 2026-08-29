@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/di/di.dart';
 import 'core/routes_manager/app_router.dart';
 import 'core/utils/app_theme.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MainApp());
 }
 
