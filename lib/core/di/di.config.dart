@@ -42,7 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i361.BaseOptions>(() => getItModule.baseOptions);
     gh.singleton<_i394.ApiServices>(() => getItModule.apiServices);
     gh.factory<_i155.AuthRemoteDataSource>(() =>
-        _i122.AuthRemoteDataSourceImplementation(gh<_i394.ApiServices>()));
+        _i122.AuthRemoteDataSourceImpl(gh<_i394.ApiServices>()));
     gh.singleton<_i361.Dio>(() => getItModule.provideDio(
           gh<_i361.BaseOptions>(),
           gh<_i528.PrettyDioLogger>(),
