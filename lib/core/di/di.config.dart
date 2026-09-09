@@ -51,8 +51,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i298.AuthRepositoryImplementation(gh<_i155.AuthRemoteDataSource>()));
     gh.factory<_i210.LoginUseCase>(
         () => _i210.LoginUseCase(gh<_i912.AuthRepository>()));
-    gh.factory<_i747.SignInViewModel>(
-        () => _i747.SignInViewModel(gh<_i210.LoginUseCase>()));
+    gh.factory<_i747.LoginViewModel>(
+        () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()));;
     return this;
   }
 }

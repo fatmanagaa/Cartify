@@ -1,11 +1,18 @@
+import '../../core/exceptions/app_exceptions.dart';
+import '../../domain/entities/response/auth/auth_response.dart';
+
 sealed class AuthStates {}
 
-class AuthLoading extends AuthStates {}
+class AuthLoadingState extends AuthStates {}
 
-class AuthSuccess extends AuthStates {}
+class AuthErrorState extends AuthStates {
+  AppException errorMessage;
 
-class AuthFailure extends AuthStates {
-  final String error;
+  AuthErrorState({required this.errorMessage});
+}
 
-  AuthFailure({required this.error});
+class AuthSuccessState extends AuthStates {
+  AuthResponse authResponse;
+
+  AuthSuccessState({required this.authResponse});
 }
