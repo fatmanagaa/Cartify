@@ -24,7 +24,9 @@ import '../../data/repository/auth/auth_repository_implementation.dart'
     as _i298;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
 import '../../domain/usecases/login_use_case.dart' as _i210;
+import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
+import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -41,18 +43,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i528.PrettyDioLogger>(() => getItModule.prettyDioLogger);
     gh.singleton<_i361.BaseOptions>(() => getItModule.baseOptions);
     gh.singleton<_i394.ApiServices>(() => getItModule.apiServices);
-    gh.factory<_i155.AuthRemoteDataSource>(() =>
-        _i122.AuthRemoteDataSourceImpl(gh<_i394.ApiServices>()));
     gh.singleton<_i361.Dio>(() => getItModule.provideDio(
           gh<_i361.BaseOptions>(),
           gh<_i528.PrettyDioLogger>(),
         ));
+    gh.factory<_i155.AuthRemoteDataSource>(
+        () => _i122.AuthRemoteDataSourceImpl(gh<_i394.ApiServices>()));
     gh.factory<_i912.AuthRepository>(() =>
         _i298.AuthRepositoryImplementation(gh<_i155.AuthRemoteDataSource>()));
     gh.factory<_i210.LoginUseCase>(
         () => _i210.LoginUseCase(gh<_i912.AuthRepository>()));
+    gh.factory<_i502.RegisterUseCase>(
+        () => _i502.RegisterUseCase(gh<_i912.AuthRepository>()));
+    gh.factory<_i550.RegisterViewModel>(
+        () => _i550.RegisterViewModel(gh<_i502.RegisterUseCase>()));
     gh.factory<_i747.LoginViewModel>(
-        () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()));;
+        () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()));
     return this;
   }
 }

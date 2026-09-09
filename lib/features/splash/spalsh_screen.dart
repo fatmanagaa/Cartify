@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -23,8 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox(
+    return Scaffold(body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Image.asset('assets/images/logo.png'),

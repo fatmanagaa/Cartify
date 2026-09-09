@@ -2,16 +2,22 @@ import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/features/product_details/presentation/screen/product_details.dart';
 import 'package:ecommerce_app/features/products_screen/presentation/screens/products_screen.dart';
+import 'package:ecommerce_app/features/splash/spalsh_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/auth/login/sign_in_screen.dart';
-import '../../features/auth/resgister/sign_up_screen.dart';
+import '../../features/auth/resgister/register_screen.dart';
 import 'app_routes.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.signInRoute,
     routes: [
+      GoRoute(
+        name: Routes.splashScreen,
+          path: Routes.splashScreen,
+          builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         name: Routes.signInRouteName,
         path: Routes.signInRoute,
@@ -20,7 +26,7 @@ abstract class AppRouter {
       GoRoute(
         name: Routes.signUpRouteName,
         path: Routes.signUpRoute,
-        builder: (context, state) => const SignUpScreen(),
+        builder: (context, state) => const RegisterScreen(),
       ),
       GoRoute(
         name: Routes.mainRouteName,
