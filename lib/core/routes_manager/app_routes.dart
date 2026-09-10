@@ -13,4 +13,5 @@ class Routes {
   static const String signInRoute = "/signIn";
   static const String signUpRouteName = 'sign-up';
   static const String signUpRoute = "/signUp";
+  static const String splashScreen="/splash";
 }

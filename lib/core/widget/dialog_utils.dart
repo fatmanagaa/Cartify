@@ -26,6 +26,7 @@ class DialogUtils {
   static void showMessage(
     BuildContext context, {
     required String message,
+    String? title,
     String? posActionName,
     VoidCallback? posAction,
     String? negActionName,
@@ -55,6 +56,7 @@ class DialogUtils {
       context: context,
       builder: (context) {
         return AlertDialog(
+          title: title != null ? Text(title) : null,
           content: Text(message),
           actions: actions,
         );
