@@ -85,6 +85,4 @@ lib/
    flutter run
    ```
 
----
 
-*Developed with ❤️ using Flutter.*
