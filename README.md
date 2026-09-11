@@ -1,4 +1,4 @@
-# E-Commerce App
+# Cartify
 
 A modern, high-performance e-commerce mobile application built with Flutter, following professional development standards and Clean Architecture principles.
 
