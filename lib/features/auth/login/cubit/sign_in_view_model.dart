@@ -10,7 +10,7 @@ import '../../auth_states.dart';
 class LoginViewModel extends Cubit<AuthStates> {
   final LoginUseCase _loginUseCase;
 
-  LoginViewModel(this._loginUseCase) : super(AuthLoadingState());
+  LoginViewModel(this._loginUseCase) : super(AuthInitialState());
 
   //todo: hold data - handle logic
 

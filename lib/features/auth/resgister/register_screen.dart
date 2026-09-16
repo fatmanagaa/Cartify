@@ -42,6 +42,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
     }
   }
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    rePasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import '../../auth_states.dart';
 class RegisterViewModel extends Cubit<AuthStates> {
   final RegisterUseCase _registerUseCase;
 
-  RegisterViewModel(this._registerUseCase) : super(AuthLoadingState());
+  RegisterViewModel(this._registerUseCase) : super(AuthInitialState());
 
   //todo: hold data - handle logic
 
