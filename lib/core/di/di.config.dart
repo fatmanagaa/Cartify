@@ -14,7 +14,7 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 
-import '../../api/api_services.dart' as _i394;
+import '../../api/retrofit/api_services.dart' as _i394;
 import '../../api/data_source/remote/auth/auth_remote_data_source_implementation.dart'
     as _i122;
 import '../../api/dio/get_it_module.dart' as _i814;

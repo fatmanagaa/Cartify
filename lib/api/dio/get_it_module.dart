@@ -4,7 +4,7 @@ import 'package:ecommerce_app/api/model/api_endpoints.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../api_services.dart';
+import '../retrofit/api_services.dart';
 
 @module
 abstract class GetItModule {
