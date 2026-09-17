@@ -11,12 +11,12 @@ import 'app_routes.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: Routes.signInRoute,
+    initialLocation: Routes.mainRouteName,
     routes: [
       GoRoute(
         name: Routes.splashScreen,
-          path: Routes.splashScreen,
-          builder: (context, state) => const SplashScreen(),
+        path: Routes.splashScreen,
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         name: Routes.signInRouteName,

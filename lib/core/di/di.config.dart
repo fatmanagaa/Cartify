@@ -59,6 +59,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i550.RegisterViewModel(gh<_i502.RegisterUseCase>()));
     gh.factory<_i747.LoginViewModel>(
         () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()));
+
     return this;
   }
 }
