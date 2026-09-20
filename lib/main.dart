@@ -7,8 +7,8 @@ import 'core/utils/app_theme.dart';
 import 'core/utils/my_bloc_observer.dart';
 
 void main() {
-  configureDependencies();
   Bloc.observer = MyBlocObserver();
+  configureDependencies();
   runApp(const MainApp());
 }
 

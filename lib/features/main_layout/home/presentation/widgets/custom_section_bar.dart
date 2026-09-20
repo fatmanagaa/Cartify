@@ -21,7 +21,7 @@ class CustomSectionBar extends StatelessWidget {
             sectionNname,
             style: getMediumStyle(
               color: ColorManager.darkBlue,
-              fontSize: 18.sp,
+              fontSize: 22.sp,
             ),
           ),
           TextButton(
@@ -32,7 +32,7 @@ class CustomSectionBar extends StatelessWidget {
               'view all',
               style: getMediumStyle(
                 color: ColorManager.darkBlue,
-                fontSize: 12.sp,
+                fontSize: 18.sp,
               ),
             ),
           ),
