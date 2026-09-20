@@ -21,6 +21,7 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainLayoutViewModel, MainLayoutStates>(
+      bloc: viewModel,
       builder: (context, state) {
         return Scaffold(
           appBar: const HomeScreenAppBar(),

@@ -14,6 +14,7 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? automaticallyImplyLeading;
   const HomeScreenAppBar({super.key, this.automaticallyImplyLeading});
 
+
   @override
   Widget build(BuildContext context) {
     return AppBar(

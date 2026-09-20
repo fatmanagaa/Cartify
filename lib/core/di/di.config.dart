@@ -14,10 +14,10 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 
-import '../../api/retrofit/api_services.dart' as _i394;
 import '../../api/data_source/remote/auth/auth_remote_data_source_implementation.dart'
     as _i122;
 import '../../api/dio/get_it_module.dart' as _i814;
+import '../../api/retrofit/api_services.dart' as _i222;
 import '../../data/data_source/remote/auth/auth_remote_data_source.dart'
     as _i155;
 import '../../data/repository/auth/auth_repository_implementation.dart'
@@ -27,6 +27,7 @@ import '../../domain/usecases/login_use_case.dart' as _i210;
 import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
 import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
+import '../../features/main_layout/cubit/main_layout_view_model.dart' as _i860;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -41,14 +42,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final getItModule = _$GetItModule();
     gh.factory<_i528.PrettyDioLogger>(() => getItModule.prettyDioLogger);
+    gh.factory<_i860.MainLayoutViewModel>(() => _i860.MainLayoutViewModel());
     gh.singleton<_i361.BaseOptions>(() => getItModule.baseOptions);
-    gh.singleton<_i394.ApiServices>(() => getItModule.apiServices);
+    gh.singleton<_i222.ApiServices>(() => getItModule.apiServices);
     gh.singleton<_i361.Dio>(() => getItModule.provideDio(
           gh<_i361.BaseOptions>(),
           gh<_i528.PrettyDioLogger>(),
         ));
     gh.factory<_i155.AuthRemoteDataSource>(
-        () => _i122.AuthRemoteDataSourceImpl(gh<_i394.ApiServices>()));
+        () => _i122.AuthRemoteDataSourceImpl(gh<_i222.ApiServices>()));
     gh.factory<_i912.AuthRepository>(() =>
         _i298.AuthRepositoryImplementation(gh<_i155.AuthRemoteDataSource>()));
     gh.factory<_i210.LoginUseCase>(
@@ -59,7 +61,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i550.RegisterViewModel(gh<_i502.RegisterUseCase>()));
     gh.factory<_i747.LoginViewModel>(
         () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()));
-
     return this;
   }
 }
