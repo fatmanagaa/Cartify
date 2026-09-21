@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/api/dio/dio_interceptors.dart';
-import 'package:ecommerce_app/api/model/api_endpoints.dart';
+import 'package:ecommerce_app/api/model/api_constants/api_endpoints.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
