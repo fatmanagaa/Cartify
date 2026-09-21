@@ -11,7 +11,7 @@ class CategoriesList extends StatefulWidget {
 }
 
 class _CategoriesListState extends State<CategoriesList> {
-  // Index of the currently selected category
+  // Index of the currently selected category_brand
   int selectedIndex = 0;
 
   @override

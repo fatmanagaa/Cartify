@@ -14,7 +14,7 @@ class CategoryCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Create a container for the category card
+    // Create a container for the category_brand card
     return Container(
       margin: const EdgeInsets.symmetric(vertical: AppSize.s16),
       // Height of the card set with fixed size to make all image same size but it can be deleted without affecting the code
