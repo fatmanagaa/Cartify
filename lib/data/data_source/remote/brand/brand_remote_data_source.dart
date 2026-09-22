@@ -2,5 +2,5 @@ import 'package:ecommerce_app/domain/entities/response/category_brand/category_o
 
 abstract class BrandRemoteDataSource {
 
-  Future<CategoryOrBrandResponse> getBrands();
+  Future<CategoryOrBrandResponse> getAllBrands();
 }

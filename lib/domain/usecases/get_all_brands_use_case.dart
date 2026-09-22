@@ -8,6 +8,6 @@ class GetAllBrandsUseCase {
   GetAllBrandsUseCase(this.brandRepository);
 
   Future<CategoryOrBrandResponse?> invoke() async {
-    return await brandRepository.getBrands();
+    return await brandRepository.getAllBrands();
   }
 }

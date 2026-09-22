@@ -1,10 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'comman/category_brand_dto.dart';
+import 'comman/meta_data_dto.dart';
+part 'category_or_brand_dto_response.g.dart';
 
-import '../comman/category_brand_dto.dart';
-import '../comman/meta_data_dto.dart';
-
-
-part 'category_or_brand_dto.g.dart';
 
 @JsonSerializable()
 class CategoryOrBrandDtoResponse {

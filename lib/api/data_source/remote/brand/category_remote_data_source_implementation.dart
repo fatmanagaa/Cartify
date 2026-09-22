@@ -3,17 +3,16 @@ import 'package:ecommerce_app/domain/entities/response/category_brand/category_o
 import 'package:injectable/injectable.dart';
 
 import '../../../../data/data_source/remote/brand/brand_remote_data_source.dart';
-import '../../../../data/data_source/remote/category/category_remote_data_source.dart';
 
 @Injectable(as: BrandRemoteDataSource)
-class BrandRemoteDataSourceImplementation implements CategoryRemoteDataSource {
+class BrandRemoteDataSourceImplementation implements BrandRemoteDataSource {
   ApiServices apiServices;
 
   BrandRemoteDataSourceImplementation(this.apiServices);
 
   @override
-  Future<CategoryOrBrandResponse> getCategories() {
-    // TODO: implement getCategories
+  Future<CategoryOrBrandResponse> getAllBrands() {
+    // TODO: implement getAllBrands
     throw UnimplementedError();
   }
 }
