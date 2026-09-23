@@ -16,7 +16,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 
 import '../../api/data_source/remote/auth/auth_remote_data_source_implementation.dart'
     as _i122;
-import '../../api/data_source/remote/brand/category_remote_data_source_implementation.dart'
+import '../../api/data_source/remote/brand/brand_remote_data_source_implementation.dart'
     as _i939;
 import '../../api/data_source/remote/category/category_remote_data_source_implementation.dart'
     as _i824;
