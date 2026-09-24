@@ -17,7 +17,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
 import '../../api/data_source/remote/auth/auth_remote_data_source_implementation.dart'
     as _i122;
 import '../../api/data_source/remote/brand/brand_remote_data_source_implementation.dart'
-    as _i939;
+    as _i1020;
 import '../../api/data_source/remote/category/category_remote_data_source_implementation.dart'
     as _i824;
 import '../../api/dio/get_it_module.dart' as _i814;
@@ -44,6 +44,8 @@ import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
 import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
 import '../../features/main_layout/cubit/main_layout_view_model.dart' as _i860;
+import '../../features/main_layout/home/presentation/cubit/home_tab_view_model.dart'
+    as _i127;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -57,12 +59,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i860.MainLayoutViewModel>(() => _i860.MainLayoutViewModel());
     gh.singleton<_i361.BaseOptions>(() => getItModule.baseOptions);
     gh.singleton<_i222.ApiServices>(() => getItModule.apiServices);
-    gh.factory<_i511.BrandRemoteDataSource>(
-      () => _i939.BrandRemoteDataSourceImplementation(gh<_i222.ApiServices>()),
-    );
     gh.factory<_i653.CategoryRemoteDataSource>(
       () =>
           _i824.CategoryRemoteDataSourceImplementation(gh<_i222.ApiServices>()),
+    );
+    gh.factory<_i511.BrandRemoteDataSource>(
+      () => _i1020.BrandRemoteDataSourceImplementation(gh<_i222.ApiServices>()),
     );
     gh.singleton<_i361.Dio>(
       () => getItModule.provideDio(
@@ -84,6 +86,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i318.GetAllBrandsUseCase>(
       () => _i318.GetAllBrandsUseCase(gh<_i244.BrandRepository>()),
+    );
+    gh.factory<_i127.HomeTabViewModel>(
+      () => _i127.HomeTabViewModel(
+        gh<_i716.GetAllCategoriesUseCase>(),
+      ),
     );
     gh.factory<_i912.AuthRepository>(
       () =>

@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   left: AppPadding.p2.w,
                   right: AppPadding.p2.w,
                 ),
-                child: Image.asset(ImageAssets.Logo),
+                child: Image.asset(ImageAssets.logo),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w),

@@ -1,7 +1,12 @@
 import 'dart:async';
+import 'package:ecommerce_app/core/di/di.dart';
+import 'package:ecommerce_app/core/widget/main_error_widget.dart';
+import 'package:ecommerce_app/core/widget/main_loading_widget.dart';
+import 'package:ecommerce_app/features/main_layout/home/presentation/cubit/home_tab_states.dart';
+import 'package:ecommerce_app/features/main_layout/home/presentation/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/custom_brand_widget.dart';
-import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/custom_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ecommerce_app/core/utils/app_assets.dart';
@@ -17,6 +22,8 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
+
   int _currentIndex = 0;
   late Timer _timer;
 
@@ -30,6 +37,7 @@ class _HomeTabState extends State<HomeTab> {
   void initState() {
     super.initState();
     _startImageSwitching();
+    viewModel.getCategories();
   }
 
   void _startImageSwitching() {
@@ -58,19 +66,20 @@ class _HomeTabState extends State<HomeTab> {
           ),
           Column(
             children: [
+              SizedBox(height: 24.h),
               CustomSectionBar(sectionNname: 'Categories', function: () {}),
-              SizedBox(
-                height: 270.h,
-                child: GridView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return const CustomCategoryWidget();
-                  },
-                  itemCount: 20,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                ),
+              BlocBuilder<HomeTabViewModel, HomeTabStates>(
+                bloc: viewModel,
+                builder: (context, state) {
+                  if (state is CategoryErrorState) {
+                    return MainErrorWidget(errorMessage: state.errorMessage);
+                  } else if (state is CategorySuccessState) {
+                    return Text(state.categoriesList.length.toString());
+                  } else {
+                    //todo: loading
+                    return const MainLoadingWidget();
+                  }
+                },
               ),
               SizedBox(height: 12.h),
               CustomSectionBar(sectionNname: 'Brands', function: () {}),
