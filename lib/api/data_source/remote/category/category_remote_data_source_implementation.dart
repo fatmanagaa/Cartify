@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/api/mapper/category_brand/category_brand_mapper.dart';
 import 'package:ecommerce_app/api/retrofit/api_services.dart';
 import 'package:ecommerce_app/domain/entities/response/category_brand/category_or_brand_response.dart';
 import 'package:injectable/injectable.dart';
@@ -15,5 +14,7 @@ class CategoryRemoteDataSourceImplementation implements CategoryRemoteDataSource
   Future<CategoryOrBrandResponse> getCategories() async {
     var categoryResponse = await apiServices.getCategories();
     return categoryResponse.toCategoryOrBrandResponse();
+
+
   }
 }
