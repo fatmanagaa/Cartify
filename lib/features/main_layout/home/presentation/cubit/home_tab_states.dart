@@ -17,3 +17,17 @@ class CategorySuccessState extends HomeTabStates {
 
   CategorySuccessState({required this.categoriesList});
 }
+
+class BrandLoadingState extends HomeTabStates {}
+
+class BrandErrorState extends HomeTabStates {
+  String errorMessage;
+
+  BrandErrorState({required this.errorMessage});
+}
+
+class BrandSuccessState extends HomeTabStates {
+  List<CategoryBrand> brandsList;
+
+  BrandSuccessState({required this.brandsList});
+}

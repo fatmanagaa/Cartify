@@ -5,10 +5,10 @@ import 'package:ecommerce_app/core/widget/main_loading_widget.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/cubit/home_tab_states.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/cubit/home_tab_view_model.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/custom_brand_widget.dart';
+import 'package:ecommerce_app/features/main_layout/home/presentation/widgets/custom_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import '../../../../core/widget/product_card.dart';
 import 'widgets/custom_ads_widget.dart';
@@ -38,6 +38,7 @@ class _HomeTabState extends State<HomeTab> {
     super.initState();
     _startImageSwitching();
     viewModel.getCategories();
+    viewModel.getBrands();
   }
 
   void _startImageSwitching() {
@@ -70,31 +71,68 @@ class _HomeTabState extends State<HomeTab> {
               CustomSectionBar(sectionNname: 'Categories', function: () {}),
               BlocBuilder<HomeTabViewModel, HomeTabStates>(
                 bloc: viewModel,
+                buildWhen: (previous, current) =>
+                    current is CategoryLoadingState ||
+                    current is CategorySuccessState ||
+                    current is CategoryErrorState,
                 builder: (context, state) {
-                  if (state is CategoryErrorState) {
+                  if (state is CategoryErrorState &&
+                      viewModel.categoriesList == null) {
                     return MainErrorWidget(errorMessage: state.errorMessage);
-                  } else if (state is CategorySuccessState) {
-                    return Text(state.categoriesList.length.toString());
+                  } else if (viewModel.categoriesList != null) {
+                    return SizedBox(
+                      height: 270.h,
+                      child: GridView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: viewModel.categoriesList!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CustomCategoryWidget(
+                            category: viewModel.categoriesList![index],
+                          );
+                        },
+                      ),
+                    );
                   } else {
-                    //todo: loading
                     return const MainLoadingWidget();
                   }
                 },
               ),
               SizedBox(height: 12.h),
               CustomSectionBar(sectionNname: 'Brands', function: () {}),
-              SizedBox(
-                height: 270.h,
-                child: GridView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return const CustomBrandWidget();
-                  },
-                  itemCount: 20,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                ),
+              BlocBuilder<HomeTabViewModel, HomeTabStates>(
+                bloc: viewModel,
+                buildWhen: (previous, current) =>
+                    current is BrandLoadingState ||
+                    current is BrandSuccessState ||
+                    current is BrandErrorState,
+                builder: (context, state) {
+                  if (state is BrandErrorState && viewModel.brandsList == null) {
+                    return MainErrorWidget(errorMessage: state.errorMessage);
+                  } else if (viewModel.brandsList != null) {
+                    return SizedBox(
+                      height: 270.h,
+                      child: GridView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: viewModel.brandsList!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CustomBrandWidget(
+                            brand: viewModel.brandsList![index],
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const MainLoadingWidget();
+                  }
+                },
               ),
               CustomSectionBar(
                 sectionNname: 'Most Selling Products',

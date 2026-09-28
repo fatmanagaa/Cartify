@@ -1,9 +1,14 @@
-import '../../../../../core/utils/app_assets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../domain/entities/response/comman/category_brand.dart';
+
 class CustomBrandWidget extends StatelessWidget {
-  const CustomBrandWidget({super.key});
+  final CategoryBrand brand;
+
+  const CustomBrandWidget({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +22,15 @@ class CustomBrandWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
-            child: Image.asset(
-              ImageAssets.brandHomeImage,
+            child: CachedNetworkImage(
+              imageUrl: brand.image ?? "",
               fit: BoxFit.cover,
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),

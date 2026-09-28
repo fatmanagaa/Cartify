@@ -90,6 +90,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i127.HomeTabViewModel>(
       () => _i127.HomeTabViewModel(
         gh<_i716.GetAllCategoriesUseCase>(),
+        gh<_i318.GetAllBrandsUseCase>(),
       ),
     );
     gh.factory<_i912.AuthRepository>(

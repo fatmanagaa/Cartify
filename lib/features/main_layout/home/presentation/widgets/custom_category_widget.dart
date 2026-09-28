@@ -1,11 +1,15 @@
-import '../../../../../core/utils/app_assets.dart';
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_styles.dart';
+import '../../../../../domain/entities/response/comman/category_brand.dart';
+
 class CustomCategoryWidget extends StatelessWidget {
-  const CustomCategoryWidget({super.key});
+  final CategoryBrand category;
+
+  const CustomCategoryWidget({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +23,24 @@ class CustomCategoryWidget extends StatelessWidget {
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
-            child: Image.asset(
-              ImageAssets.categoryHomeImage,
+            child: CachedNetworkImage(
+              imageUrl: category.image ?? "",
               fit: BoxFit.cover,
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
         SizedBox(height: 8.h),
         Text(
-          "Laptops",
+          category.name ?? "",
           style: getRegularStyle(color: ColorManager.darkBlue, fontSize: 14.sp),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
