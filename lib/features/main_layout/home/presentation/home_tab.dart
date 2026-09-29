@@ -87,8 +87,8 @@ class _HomeTabState extends State<HomeTab> {
                         itemCount: viewModel.categoriesList!.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
+                              crossAxisCount: 2,
+                            ),
                         itemBuilder: (context, index) {
                           return CustomCategoryWidget(
                             category: viewModel.categoriesList![index],
@@ -110,7 +110,8 @@ class _HomeTabState extends State<HomeTab> {
                     current is BrandSuccessState ||
                     current is BrandErrorState,
                 builder: (context, state) {
-                  if (state is BrandErrorState && viewModel.brandsList == null) {
+                  if (state is BrandErrorState &&
+                      viewModel.brandsList == null) {
                     return MainErrorWidget(errorMessage: state.errorMessage);
                   } else if (viewModel.brandsList != null) {
                     return SizedBox(
@@ -120,8 +121,8 @@ class _HomeTabState extends State<HomeTab> {
                         itemCount: viewModel.brandsList!.length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
+                              crossAxisCount: 2,
+                            ),
                         itemBuilder: (context, index) {
                           return CustomBrandWidget(
                             brand: viewModel.brandsList![index],
@@ -159,7 +160,7 @@ class _HomeTabState extends State<HomeTab> {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
