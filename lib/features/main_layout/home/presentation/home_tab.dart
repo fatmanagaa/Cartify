@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:ecommerce_app/core/di/di.dart';
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/core/widget/main_error_widget.dart';
 import 'package:ecommerce_app/core/widget/main_loading_widget.dart';
 import 'package:ecommerce_app/features/main_layout/home/presentation/cubit/home_tab_states.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/widget/product_card.dart';
 import 'widgets/custom_ads_widget.dart';
 import 'widgets/custom_section_bar.dart';
@@ -68,7 +70,10 @@ class _HomeTabState extends State<HomeTab> {
           Column(
             children: [
               SizedBox(height: 24.h),
-              CustomSectionBar(sectionNname: 'Categories', function: () {}),
+              CustomSectionBar(
+                sectionNname: 'Categories',
+                function: () => context.pushNamed(Routes.productsScreenRouteName),
+              ),
               BlocBuilder<HomeTabViewModel, HomeTabStates>(
                 bloc: viewModel,
                 buildWhen: (previous, current) =>
@@ -102,7 +107,10 @@ class _HomeTabState extends State<HomeTab> {
                 },
               ),
               SizedBox(height: 12.h),
-              CustomSectionBar(sectionNname: 'Brands', function: () {}),
+              CustomSectionBar(
+                sectionNname: 'Brands',
+                function: () => context.pushNamed(Routes.productsScreenRouteName),
+              ),
               BlocBuilder<HomeTabViewModel, HomeTabStates>(
                 bloc: viewModel,
                 buildWhen: (previous, current) =>
@@ -137,7 +145,7 @@ class _HomeTabState extends State<HomeTab> {
               ),
               CustomSectionBar(
                 sectionNname: 'Most Selling Products',
-                function: () {},
+                function: () => context.pushNamed(Routes.productsScreenRouteName),
               ),
               SizedBox(
                 child: SizedBox(
