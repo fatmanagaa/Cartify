@@ -1,13 +1,16 @@
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/features/auth/auth_states.dart';
 import 'package:ecommerce_app/features/auth/resgister/cubit/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
+import 'package:ecommerce_app/core/utils/font_manager.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/widget/dialog_utils.dart';
@@ -31,7 +34,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   void register() async {
-    //todo: signup
     if (_formKey.currentState!.validate()) {
       viewModel.register(
         email: emailController.text,
@@ -42,6 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
     }
   }
+
   @override
   void dispose() {
     fullNameController.dispose();
@@ -73,6 +76,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context,
             message: 'Register Success',
             posActionName: 'Ok',
+            posAction: () {
+              context.goNamed(Routes.signInRouteName);
+            },
             title: 'Success',
           );
         }
@@ -173,7 +179,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: AppSize.s0.h,
+                        height: 20.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already have an account?',
+                            style: getSemiBoldStyle(color: ColorManager.white)
+                                .copyWith(fontSize: FontSize.s16.sp),
+                          ),
+                          SizedBox(
+                            width: AppSize.s8.w,
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                context.goNamed(Routes.signInRouteName),
+                            child: Text(
+                              'Sign In',
+                              style: getSemiBoldStyle(color: ColorManager.white)
+                                  .copyWith(fontSize: FontSize.s16.sp),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.h,
                       ),
                     ],
                   ),

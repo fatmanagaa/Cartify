@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
+import 'package:ecommerce_app/core/utils/app_assets.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = 'splash';
@@ -15,17 +19,22 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, '/signIn');
+    Timer(const Duration(seconds: 7), () {
+      if (mounted) {
+        context.goNamed(Routes.signInRouteName);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Image.asset('assets/images/logo.png'),
+    return Scaffold(
+      backgroundColor: ColorManager.primary,
+      body: Center(
+        child: Image.asset(
+          ImageAssets.logo,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }

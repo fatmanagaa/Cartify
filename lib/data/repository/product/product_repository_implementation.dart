@@ -1,17 +1,16 @@
 import 'package:ecommerce_app/data/data_source/remote/product/product_remote_data_source.dart';
-import 'package:ecommerce_app/domain/entities/response/product/product.dart';
+import 'package:ecommerce_app/domain/entities/response/product/product_response.dart';
 import 'package:injectable/injectable.dart';
 import '../../../domain/repository/product/product_repository.dart';
 
 @Injectable(as: ProductRepository)
 class ProductRepositoryImpl implements ProductRepository {
-ProductRemoteDataSource productRemoteDataSource;
+  final ProductRemoteDataSource productRemoteDataSource;
 
+  ProductRepositoryImpl(this.productRemoteDataSource);
 
-ProductRepositoryImpl(this.productRemoteDataSource);
-
-@override
-  Future<Product?> getAllProducts() {
+  @override
+  Future<ProductResponse?> getAllProducts() {
     return productRemoteDataSource.getAllProducts();
   }
-  }
+}

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/features/product_details/presentation/widgets/product_color.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce_app/features/product_details/presentation/widgets/prod
 import 'package:ecommerce_app/features/product_details/presentation/widgets/product_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
@@ -36,7 +38,7 @@ class ProductDetails extends StatelessWidget {
                 color: ColorManager.primary,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () => context.pushNamed(Routes.cartRouteName),
               icon: Icon(
                 Icons.shopping_cart_outlined,
                 color: ColorManager.primary,
@@ -122,7 +124,7 @@ class ProductDetails extends StatelessWidget {
                 Expanded(
                   child: CustomElevatedButton(
                     label: 'Add to cart',
-                    onTap: () {},
+                    onTap: () => context.pushNamed(Routes.cartRouteName),
                     prefixIcon: Icon(
                       Icons.add_shopping_cart_outlined,
                       color: ColorManager.white,
