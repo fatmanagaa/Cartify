@@ -3,6 +3,7 @@ import 'package:ecommerce_app/api/model/request/auth/login/login_request_dto.dar
 import 'package:ecommerce_app/api/model/request/auth/register/register_request_dto.dart';
 import 'package:ecommerce_app/api/model/response/auth/auth_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/product/product_response_dto.dart';
+import 'package:ecommerce_app/api/model/response/product/single_product_response_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import '../model/api_constants/api_endpoints.dart';
 import '../model/response/category_brand/category_or_brand_dto_response.dart';
@@ -27,5 +28,6 @@ abstract class ApiServices {
   @GET(ApiEndpoints.productsEndpoint)
   Future<ProductResponseDto> getAllProducts();
 
-
+  @GET('${ApiEndpoints.productsEndpoint}/{id}')
+  Future<SingleProductResponseDto> getProductDetails(@Path('id') String productId);
 }

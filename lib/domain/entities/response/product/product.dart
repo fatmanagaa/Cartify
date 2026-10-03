@@ -1,11 +1,10 @@
-
-import 'package:ecommerce_app/domain/entities/response/category_brand/category_or_brand_response.dart';
+import 'package:ecommerce_app/domain/entities/response/comman/category_brand.dart';
 import 'package:ecommerce_app/domain/entities/response/product/sub_category.dart';
 
 class Product {
   final int? sold;
   final List<String>? images;
-  final List<SubCategory   >? subcategory;
+  final List<SubCategory>? subcategory;
   final int? ratingsQuantity;
   final String? id;
   final String? title;
@@ -14,8 +13,8 @@ class Product {
   final int? quantity;
   final int? price;
   final String? imageCover;
-  final CategoryOrBrandResponse? category;
-  final CategoryOrBrandResponse? brand;
+  final CategoryBrand? category;
+  final CategoryBrand? brand;
   final num? ratingsAverage;
   final String? createdAt;
   final String? updatedAt;
