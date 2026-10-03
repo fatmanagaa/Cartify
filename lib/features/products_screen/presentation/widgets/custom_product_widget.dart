@@ -41,7 +41,10 @@ class CustomProductWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return InkWell(
-      onTap: () => context.pushNamed(Routes.productDetailsRouteName),
+      onTap: () => context.pushNamed(
+        Routes.productDetailsRouteName,
+        extra: product,
+      ),
       child: Container(
         width: width * 0.4,
         height: height * 0.3,

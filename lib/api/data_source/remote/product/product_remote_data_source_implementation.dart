@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/api/mapper/product/product_mapper.dart';
+import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/exceptions/app_exceptions.dart';
@@ -18,6 +20,17 @@ class ProductRemoteDataSourceImplementation implements ProductRemoteDataSource {
     try {
       var productResponse = await apiServices.getAllProducts();
       return productResponse.toProductResponse();
+    } on DioException catch (e) {
+      String message = (e.error as AppException).message;
+      throw ServerException(message: message);
+    }
+  }
+
+  @override
+  Future<Product?> getProductDetails(String productId) async {
+    try {
+      var response = await apiServices.getProductDetails(productId);
+      return response.data?.toProduct();
     } on DioException catch (e) {
       String message = (e.error as AppException).message;
       throw ServerException(message: message);

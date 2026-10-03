@@ -47,6 +47,7 @@ import '../../domain/repository/product/product_repository.dart' as _i798;
 import '../../domain/usecases/get_all_brands_use_case.dart' as _i318;
 import '../../domain/usecases/get_all_categories_use_case.dart' as _i716;
 import '../../domain/usecases/get_all_products_use_case.dart' as _i436;
+import '../../domain/usecases/get_product_details_use_case.dart' as _i676;
 import '../../domain/usecases/login_use_case.dart' as _i210;
 import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
@@ -54,6 +55,8 @@ import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
 import '../../features/main_layout/cubit/main_layout_view_model.dart' as _i860;
 import '../../features/main_layout/home/presentation/cubit/home_tab_view_model.dart'
     as _i127;
+import '../../features/product_details/cubit/product_details_view_model.dart'
+    as _i36;
 import '../../features/products_screen/cubit/product_screen_view_model.dart'
     as _i751;
 
@@ -104,6 +107,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i436.GetAllProductsUseCase>(
       () => _i436.GetAllProductsUseCase(gh<_i798.ProductRepository>()),
     );
+    gh.factory<_i676.GetProductDetailsUseCase>(
+      () => _i676.GetProductDetailsUseCase(gh<_i798.ProductRepository>()),
+    );
     gh.factory<_i318.GetAllBrandsUseCase>(
       () => _i318.GetAllBrandsUseCase(gh<_i244.BrandRepository>()),
     );
@@ -119,6 +125,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i912.AuthRepository>(
       () =>
           _i298.AuthRepositoryImplementation(gh<_i155.AuthRemoteDataSource>()),
+    );
+    gh.factory<_i36.ProductDetailsViewModel>(
+      () => _i36.ProductDetailsViewModel(gh<_i676.GetProductDetailsUseCase>()),
     );
     gh.factory<_i210.LoginUseCase>(
       () => _i210.LoginUseCase(gh<_i912.AuthRepository>()),

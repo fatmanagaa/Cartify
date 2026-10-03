@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
 import 'package:ecommerce_app/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/features/product_details/presentation/screen/product_details.dart';
@@ -47,10 +48,18 @@ abstract class AppRouter {
         name: Routes.productDetailsRouteName,
         path: Routes.productDetails,
         builder: (context, state) {
-          final product = state.extra is Map<String, dynamic>
-              ? state.extra as Map<String, dynamic>
-              : null;
-          return ProductDetails(product: product);
+          Product? product;
+          String? productId;
+          if (state.extra is Product) {
+            product = state.extra as Product;
+            productId = product.id;
+          } else if (state.extra is String) {
+            productId = state.extra as String;
+          } else if (state.extra is Map<String, dynamic>) {
+            final map = state.extra as Map<String, dynamic>;
+            productId = map['id']?.toString() ?? map['_id']?.toString();
+          }
+          return ProductDetails(product: product, productId: productId);
         },
       ),
     ],

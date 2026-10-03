@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
+import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:go_router/go_router.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -13,6 +14,8 @@ class ProductCard extends StatelessWidget {
   final String description;
   final double priceBeforeDiscound;
   final double rating;
+  final Product? product;
+  final String? productId;
 
   const ProductCard({
     super.key,
@@ -22,6 +25,8 @@ class ProductCard extends StatelessWidget {
     required this.rating,
     required this.priceBeforeDiscound,
     required this.description,
+    this.product,
+    this.productId,
   });
 
   String truncateTitle(String title) {
@@ -38,7 +43,10 @@ class ProductCard extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return InkWell(
-      onTap: () => context.pushNamed(Routes.productDetailsRouteName),
+      onTap: () => context.pushNamed(
+        Routes.productDetailsRouteName,
+        extra: product ?? productId,
+      ),
       child: SizedBox(
         width: 200.w,
         height: 280.h,
