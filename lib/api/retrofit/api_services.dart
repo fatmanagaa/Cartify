@@ -29,5 +29,7 @@ abstract class ApiServices {
   Future<ProductResponseDto> getAllProducts();
 
   @GET('${ApiEndpoints.productsEndpoint}/{id}')
-  Future<SingleProductResponseDto> getProductDetails(@Path('id') String productId);
+  Future<SingleProductResponseDto> getProductDetails(
+    @Path('id') String productId,
+  );
 }
