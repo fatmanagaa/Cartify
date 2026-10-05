@@ -6,4 +6,10 @@ abstract class AuthRepository {
   Future<AuthResponse> login(LoginRequest loginRequest);
 
   Future<AuthResponse> register(RegisterRequest registerRequest);
+
+  Future<bool> saveToken(String token);
+
+  Future<String?> getToken();
+
+  Future<bool> deleteToken();
 }
