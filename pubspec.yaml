@@ -16,7 +16,6 @@ dependencies:
   auto_size_text:
   colornames:
   flutter_svg:
-  flutter_native_splash:
   readmore:
   smooth_page_indicator:
   google_fonts: ^8.2.1
