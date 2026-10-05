@@ -17,19 +17,39 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/utils/font_manager.dart';
 import '../../../../core/utils/app_styles.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final LoginViewModel signInViewModel = getIt<LoginViewModel>();
   final _formKey = GlobalKey<FormState>();
-  final _emailController =
-      TextEditingController(text: "adasdfvv@fds.com");
-  final _passwordController = TextEditingController(text: "18061717@A");
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
 
-  SignInScreen({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   void login() {
     if (_formKey.currentState!.validate()) {
       signInViewModel.login(
-          email: _emailController.text, password: _passwordController.text);
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
     }
   }
 
