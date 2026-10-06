@@ -5,6 +5,7 @@ class ApiEndpoints {
   static const String categoriesEndpoint='categories';
   static const String brandsEndpoint='brands';
   static const String productsEndpoint='products';
+  static const String addProductCartEndpoint='cart';
 
 
 

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/data/data_source/remote/product/product_remote_data_source.dart';
+import 'package:ecommerce_app/domain/entities/response/cart/add/add_product_cart_response.dart';
 import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:ecommerce_app/domain/entities/response/product/product_response.dart';
 import 'package:injectable/injectable.dart';
@@ -18,5 +19,10 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Product?> getProductDetails(String productId) {
     return productRemoteDataSource.getProductDetails(productId);
+  }
+
+  @override
+  Future<AddProductCartResponse> addProductToCart(String productId) {
+   return productRemoteDataSource.addProductToCart(productId);
   }
 }
