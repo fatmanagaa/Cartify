@@ -8,7 +8,7 @@
 
 A modern, scalable, and feature-rich E-Commerce mobile application built using **Flutter**, following **Clean Architecture** principles and production-grade software engineering practices.
 
-> 🚧 **Work in Progress / مشروع تحت التطوير المستمر**  
+> 🚧 **Work in Progress 
 > *Note: This application is currently under active development. New features, UI improvements, and integrations are being added continuously.*
 
 ---
