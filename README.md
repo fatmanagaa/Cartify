@@ -1,4 +1,4 @@
-# Cartify
+# Cartify 🛍️
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.8+-0175C2?logo=dart)](https://dart.dev)
@@ -8,7 +8,7 @@
 
 A modern, scalable, and feature-rich E-Commerce mobile application built using **Flutter**, following **Clean Architecture** principles and production-grade software engineering practices.
 
-> 🚧 **Work in Progress**  
+> 🚧 **Work in Progress / مشروع تحت التطوير المستمر**  
 > *Note: This application is currently under active development. New features, UI improvements, and integrations are being added continuously.*
 
 ---
@@ -148,9 +148,13 @@ lib/
 
 > ℹ️ *الواجهات قابلة للتحديث والتطوير - UI features are continuously being refined and expanded.*
 
-| Splash & Auth | Home & Categories | Product Details | Shopping Cart |
-| :---: | :---: | :---: | :---: |
-| *(Work in progress)* | *(Work in progress)* | *(Work in progress)* | *(Work in progress)* |
+| Splash Screen | Login Screen | Register Screen |
+| :---: | :---: | :---: |
+| ![Splash Screen](screenshots/SplashScreen.png) | ![Login Screen](screenshots/Login%20Screen.png) | ![Register Screen](screenshots/Register%20Screen.png) |
+
+| Main Dashboard | Products Listing | Product Details |
+| :---: | :---: | :---: |
+| ![Main Layout](screenshots/Main%20Layout.png) | ![Products Screen](screenshots/product%20Screen.png) | ![Product Details Screen](screenshots/Product%20Details%20Screen.png) |
 
 > 📌 **Development Status Note**:  
 > Current screens implemented include Splash, Sign In, Sign Up, Main Bottom Navigation Layout (Home, Category, Wishlist, Profile), Product Listing, Product Details, and Shopping Cart. Additional screens (Checkout, Payment Integration, Order Tracking) are actively being developed.
@@ -187,4 +191,6 @@ lib/
    flutter run
    ```
 
+---
 
+Developed with ❤️ using **Flutter** & **Clean Architecture**.
