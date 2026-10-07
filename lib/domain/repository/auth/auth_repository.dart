@@ -12,4 +12,6 @@ abstract class AuthRepository {
   Future<String?> getToken();
 
   Future<bool> deleteToken();
+
+  Future<bool> logout();
 }

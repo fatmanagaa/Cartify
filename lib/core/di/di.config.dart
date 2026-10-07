@@ -54,6 +54,7 @@ import '../../domain/usecases/get_all_products_use_case.dart' as _i436;
 import '../../domain/usecases/get_product_details_use_case.dart' as _i676;
 import '../../domain/usecases/get_token_use_case.dart' as _i3;
 import '../../domain/usecases/login_use_case.dart' as _i210;
+import '../../domain/usecases/logout_use_case.dart' as _i840;
 import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../domain/usecases/save_token_use_case.dart' as _i1024;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
@@ -61,6 +62,8 @@ import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
 import '../../features/main_layout/cubit/main_layout_view_model.dart' as _i860;
 import '../../features/main_layout/home/presentation/cubit/home_tab_view_model.dart'
     as _i127;
+import '../../features/main_layout/profile_tab/presentation/cubit/profile_view_model.dart'
+    as _i841;
 import '../../features/product_details/cubit/product_details_view_model.dart'
     as _i36;
 import '../../features/products_screen/cubit/product_screen_view_model.dart'
@@ -150,6 +153,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i839.DeleteTokenUseCase>(
       () => _i839.DeleteTokenUseCase(gh<_i912.AuthRepository>()),
     );
+    gh.factory<_i840.LogoutUseCase>(
+      () => _i840.LogoutUseCase(gh<_i912.AuthRepository>()),
+    );
     gh.factory<_i3.GetTokenUseCase>(
       () => _i3.GetTokenUseCase(gh<_i912.AuthRepository>()),
     );
@@ -164,6 +170,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i747.LoginViewModel>(
       () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()),
+    );
+    gh.factory<_i841.ProfileViewModel>(
+      () => _i841.ProfileViewModel(gh<_i840.LogoutUseCase>()),
     );
     return this;
   }

@@ -10,6 +10,7 @@ import 'product_screen_states.dart';
 class ProductScreenViewModel extends Cubit<ProductScreenStates> {
   final GetAllProductsUseCase _getAllProductsUseCase;
 
+
   List<Product>? productsList;
 
   ProductScreenViewModel(this._getAllProductsUseCase)

@@ -49,4 +49,9 @@ class AuthRepositoryImplementation implements AuthRepository {
   Future<bool> deleteToken() {
     return authLocalDataSource.deleteToken();
   }
+
+  @override
+  Future<bool> logout() {
+    return authLocalDataSource.deleteToken();
+  }
 }
