@@ -146,7 +146,7 @@ lib/
 
 ## Screenshots & UI Showcase
 
-> ℹ️ *الواجهات قابلة للتحديث والتطوير - UI features are continuously being refined and expanded.*
+> ℹ️ - UI features are continuously being refined and expanded.*
 
 | Splash & Auth | Home & Categories | Product Details | Shopping Cart |
 | :---: | :---: | :---: | :---: |
