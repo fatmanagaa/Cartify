@@ -144,23 +144,6 @@ lib/
 
 ---
 
-## Screenshots & UI Showcase
-
-> ℹ️ - UI features are continuously being refined and expanded.*
-
-| Splash Screen | Login Screen | Register Screen |
-| :---: | :---: | :---: |
-| ![Splash Screen](screenshots/SplashScreen.png) | ![Login Screen](screenshots/Login%20Screen.png) | ![Register Screen](screenshots/Register%20Screen.png) |
-
-| Main Dashboard | Products Listing | Product Details |
-| :---: | :---: | :---: |
-| ![Main Layout](screenshots/Main%20Layout.png) | ![Products Screen](screenshots/product%20Screen.png) | ![Product Details Screen](screenshots/Product%20Details%20Screen.png) |
-
-> 📌 **Development Status Note**:  
-> Current screens implemented include Splash, Sign In, Sign Up, Main Bottom Navigation Layout (Home, Category, Wishlist, Profile), Product Listing, Product Details, and Shopping Cart. Additional screens (Checkout, Payment Integration, Order Tracking) are actively being developed.
-
----
-
 ## Setup & Installation
 
 ### Prerequisites
