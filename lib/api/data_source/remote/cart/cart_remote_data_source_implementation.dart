@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/api/retrofit/api_services.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../core/cache/shared_prefs_utils.dart';
 import '../../../../core/exceptions/app_exceptions.dart';
@@ -8,9 +9,12 @@ import '../../../../domain/entities/response/cart/add/add_product_cart_response.
 import '../../../mapper/cart/add/add_cart_response_mapper.dart';
 import '../../../model/request/cart/add/add_cart_request_dto.dart';
 
+@Injectable(as: CartRemoteDataSource)
 class CartRemoteDataSourceImplementation implements CartRemoteDataSource {
-  ApiServices apiServices;
-  CartRemoteDataSourceImplementation({required this.apiServices});
+  final ApiServices apiServices;
+
+  CartRemoteDataSourceImplementation(this.apiServices);
+
   @override
   Future<AddProductCartResponse> addProductToCart(String productId) async {
     try {
@@ -19,7 +23,8 @@ class CartRemoteDataSourceImplementation implements CartRemoteDataSource {
         productId: productId,
       );
       var addToCartResponse = await apiServices.addProductToCart(
-         token: token.toString(),
+        addCartRequest,
+        token.toString(),
       );
       //todo: AddProductCartResponseDto => AddProductCartResponse
       return addToCartResponse.toAddProductCartResponse();
@@ -27,6 +32,5 @@ class CartRemoteDataSourceImplementation implements CartRemoteDataSource {
       String message = (e.error as AppException).message;
       throw ServerException(message: message);
     }
-  }
   }
 }

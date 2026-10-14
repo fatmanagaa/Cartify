@@ -1,10 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../core/exceptions/app_exceptions.dart';
 import '../../../domain/usecases/add_to_cart_use_case.dart';
 import 'cart_states.dart';
 
-@injectable
+@lazySingleton
 class CartScreenViewModel extends Cubit<CartStates> {
   final AddToCartUseCase _addToCartUseCase;
 
@@ -15,12 +16,13 @@ class CartScreenViewModel extends Cubit<CartStates> {
 
   void addProductToCart(String productId) async {
     try {
+      emit(AddCartLoadingState());
       var addProductResponse = await _addToCartUseCase.invoke(productId);
       numOfCartItems = addProductResponse.numOfCartItems ?? 0;
-      print(object: 'numOfCartItems: $numOfCartItems');
-      emit(state: AddCartSuccessState(numOfCartItems: numOfCartItems));
+      print('numOfCartItems: $numOfCartItems');
+      emit(AddCartSuccessState(numOfCartItems: numOfCartItems));
     } on AppException catch (e) {
-      emit(state: AddCartErrorState(errorMessage: e.message));
+      emit(AddCartErrorState(errorMessage: e.message));
     }
   }
 }

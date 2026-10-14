@@ -20,6 +20,8 @@ import '../../api/data_source/remote/auth/auth_remote_data_source_implementation
     as _i122;
 import '../../api/data_source/remote/brand/brand_remote_data_source_implementation.dart'
     as _i1020;
+import '../../api/data_source/remote/cart/cart_remote_data_source_implementation.dart'
+    as _i52;
 import '../../api/data_source/remote/category/category_remote_data_source_implementation.dart'
     as _i824;
 import '../../api/data_source/remote/product/product_remote_data_source_implementation.dart'
@@ -31,6 +33,8 @@ import '../../data/data_source/remote/auth/auth_remote_data_source.dart'
     as _i155;
 import '../../data/data_source/remote/brand/brand_remote_data_source.dart'
     as _i511;
+import '../../data/data_source/remote/cart/cart_remote_data_source.dart'
+    as _i293;
 import '../../data/data_source/remote/category/category_remote_data_source.dart'
     as _i653;
 import '../../data/data_source/remote/product/product_remote_data_source.dart'
@@ -39,14 +43,18 @@ import '../../data/repository/auth/auth_repository_implementation.dart'
     as _i298;
 import '../../data/repository/brand/brand_repository_implementation.dart'
     as _i997;
+import '../../data/repository/cart/cart_repository_implementation.dart' as _i91;
 import '../../data/repository/category/category_repository_implementation.dart'
     as _i640;
 import '../../data/repository/product/product_repository_implementation.dart'
     as _i423;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
 import '../../domain/repository/brand/brand_repository.dart' as _i244;
+import '../../domain/repository/cart/cart_repository.dart' as _i1048;
 import '../../domain/repository/category/category_repository.dart' as _i495;
 import '../../domain/repository/product/product_repository.dart' as _i798;
+import '../../domain/usecases/add_products_use_case.dart' as _i422;
+import '../../domain/usecases/add_to_cart_use_case.dart' as _i157;
 import '../../domain/usecases/delete_token_use_case.dart' as _i839;
 import '../../domain/usecases/get_all_brands_use_case.dart' as _i318;
 import '../../domain/usecases/get_all_categories_use_case.dart' as _i716;
@@ -54,16 +62,17 @@ import '../../domain/usecases/get_all_products_use_case.dart' as _i436;
 import '../../domain/usecases/get_product_details_use_case.dart' as _i676;
 import '../../domain/usecases/get_token_use_case.dart' as _i3;
 import '../../domain/usecases/login_use_case.dart' as _i210;
-import '../../domain/usecases/logout_use_case.dart' as _i840;
+import '../../domain/usecases/logout_use_case.dart' as _i288;
 import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../domain/usecases/save_token_use_case.dart' as _i1024;
 import '../../features/auth/login/cubit/sign_in_view_model.dart' as _i747;
 import '../../features/auth/resgister/cubit/register_view_model.dart' as _i550;
+import '../../features/cart/cubit/cart_cubit.dart' as _i128;
 import '../../features/main_layout/cubit/main_layout_view_model.dart' as _i860;
 import '../../features/main_layout/home/presentation/cubit/home_tab_view_model.dart'
     as _i127;
 import '../../features/main_layout/profile_tab/presentation/cubit/profile_view_model.dart'
-    as _i841;
+    as _i754;
 import '../../features/product_details/cubit/product_details_view_model.dart'
     as _i36;
 import '../../features/products_screen/cubit/product_screen_view_model.dart'
@@ -93,6 +102,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i511.BrandRemoteDataSource>(
       () => _i1020.BrandRemoteDataSourceImplementation(gh<_i222.ApiServices>()),
     );
+    gh.factory<_i293.CartRemoteDataSource>(
+      () => _i52.CartRemoteDataSourceImplementation(gh<_i222.ApiServices>()),
+    );
     gh.singleton<_i361.Dio>(
       () => getItModule.provideDio(
         gh<_i361.BaseOptions>(),
@@ -108,6 +120,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i244.BrandRepository>(
       () => _i997.BrandRepositoryImpl(gh<_i511.BrandRemoteDataSource>()),
     );
+    gh.factory<_i1048.CartRepository>(
+      () => _i91.CartRepositoryImpl(gh<_i293.CartRemoteDataSource>()),
+    );
     gh.factory<_i798.ProductRepository>(
       () => _i423.ProductRepositoryImpl(gh<_i288.ProductRemoteDataSource>()),
     );
@@ -117,11 +132,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i155.AuthRemoteDataSource>(
       () => _i122.AuthRemoteDataSourceImpl(gh<_i222.ApiServices>()),
     );
+    gh.factory<_i422.AddProductsUseCase>(
+      () => _i422.AddProductsUseCase(gh<_i798.ProductRepository>()),
+    );
     gh.factory<_i436.GetAllProductsUseCase>(
       () => _i436.GetAllProductsUseCase(gh<_i798.ProductRepository>()),
     );
     gh.factory<_i676.GetProductDetailsUseCase>(
       () => _i676.GetProductDetailsUseCase(gh<_i798.ProductRepository>()),
+    );
+    gh.factory<_i157.AddToCartUseCase>(
+      () => _i157.AddToCartUseCase(gh<_i1048.CartRepository>()),
     );
     gh.factory<_i318.GetAllBrandsUseCase>(
       () => _i318.GetAllBrandsUseCase(gh<_i244.BrandRepository>()),
@@ -141,6 +162,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i955.AuthLocalDataSource>(),
       ),
     );
+    gh.lazySingleton<_i128.CartScreenViewModel>(
+      () => _i128.CartScreenViewModel(gh<_i157.AddToCartUseCase>()),
+    );
     gh.factory<_i36.ProductDetailsViewModel>(
       () => _i36.ProductDetailsViewModel(gh<_i676.GetProductDetailsUseCase>()),
     );
@@ -153,11 +177,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i839.DeleteTokenUseCase>(
       () => _i839.DeleteTokenUseCase(gh<_i912.AuthRepository>()),
     );
-    gh.factory<_i840.LogoutUseCase>(
-      () => _i840.LogoutUseCase(gh<_i912.AuthRepository>()),
-    );
     gh.factory<_i3.GetTokenUseCase>(
       () => _i3.GetTokenUseCase(gh<_i912.AuthRepository>()),
+    );
+    gh.factory<_i288.LogoutUseCase>(
+      () => _i288.LogoutUseCase(gh<_i912.AuthRepository>()),
     );
     gh.factory<_i1024.SaveTokenUseCase>(
       () => _i1024.SaveTokenUseCase(gh<_i912.AuthRepository>()),
@@ -171,8 +195,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i747.LoginViewModel>(
       () => _i747.LoginViewModel(gh<_i210.LoginUseCase>()),
     );
-    gh.factory<_i841.ProfileViewModel>(
-      () => _i841.ProfileViewModel(gh<_i840.LogoutUseCase>()),
+    gh.factory<_i754.ProfileViewModel>(
+      () => _i754.ProfileViewModel(gh<_i288.LogoutUseCase>()),
     );
     return this;
   }
