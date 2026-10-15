@@ -7,17 +7,13 @@ import 'package:ecommerce_app/features/cart/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class CustomProductWidget extends StatelessWidget {
   final Product product;
 
-  const CustomProductWidget({
-    super.key,
-    required this.product,
-  });
+  const CustomProductWidget({super.key, required this.product});
 
   String truncateTitle(String title) {
     List<String> words = title.split(' ');
@@ -43,10 +39,8 @@ class CustomProductWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return InkWell(
-      onTap: () => context.pushNamed(
-        Routes.productDetailsRouteName,
-        extra: product,
-      ),
+      onTap: () =>
+          context.pushNamed(Routes.productDetailsRouteName, extra: product),
       child: Container(
         width: width * 0.4,
         height: height * 0.3,
@@ -66,8 +60,9 @@ class CustomProductWidget extends StatelessWidget {
                 alignment: AlignmentDirectional.center,
                 children: [
                   ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(14.r)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(14.r),
+                    ),
                     child: CachedNetworkImage(
                       imageUrl: product.imageCover ?? "",
                       width: double.infinity,
@@ -149,8 +144,9 @@ class CustomProductWidget extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               if (product.id != null) {
-                                getIt<CartScreenViewModel>()
-                                    .addProductToCart(product.id!);
+                                getIt<CartScreenViewModel>().addProductToCart(
+                                  product.id!,
+                                );
                               }
                             },
                             child: Container(
@@ -160,15 +156,12 @@ class CustomProductWidget extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: ColorManager.primary,
                               ),
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                              ),
+                              child: const Icon(Icons.add, color: Colors.white),
                             ),
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

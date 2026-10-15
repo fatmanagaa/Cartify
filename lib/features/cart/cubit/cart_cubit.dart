@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/domain/usecases/get_items_in_cart_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,8 +9,10 @@ import 'cart_states.dart';
 @lazySingleton
 class CartScreenViewModel extends Cubit<CartStates> {
   final AddToCartUseCase _addToCartUseCase;
+  final GetItemsInCartUseCase _getCartUseCase;
 
-  CartScreenViewModel(this._addToCartUseCase) : super(AddCartInitialState());
+
+  CartScreenViewModel(this._addToCartUseCase, this._getCartUseCase) : super(AddCartInitialState());
 
   //todo: hold data - handle logic
   int numOfCartItems = 0;
@@ -23,6 +26,16 @@ class CartScreenViewModel extends Cubit<CartStates> {
       emit(AddCartSuccessState(numOfCartItems: numOfCartItems));
     } on AppException catch (e) {
       emit(AddCartErrorState(errorMessage: e.message));
+    }
+  }
+
+  void getItemsInCart() async {
+    try {
+      emit(GetCartLoadingState());
+      var getCartResponse = await _getCartUseCase.invoke();
+      emit(GetCartSuccessState(getCart: getCartResponse.toGetProducts()));
+    } on AppException catch (e) {
+      emit(GetCartErrorState(errorMessage: e.message));
     }
   }
 }
