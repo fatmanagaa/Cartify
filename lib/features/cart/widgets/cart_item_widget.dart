@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_styles.dart';
@@ -57,12 +58,24 @@ class CartItemWidget extends StatelessWidget {
               border: Border.all(
                   color: ColorManager.primary.withValues(alpha: 0.3)),
             ),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              height: isPortrait ? height * 0.142 : height * 0.23,
-              width: isPortrait ? width * 0.29 : 165.w,
-            ),
+            child: imagePath.startsWith('http')
+                ? CachedNetworkImage(
+                    imageUrl: imagePath,
+                    fit: BoxFit.cover,
+                    height: isPortrait ? height * 0.142 : height * 0.23,
+                    width: isPortrait ? width * 0.29 : 165.w,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  )
+                : Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                    height: isPortrait ? height * 0.142 : height * 0.23,
+                    width: isPortrait ? width * 0.29 : 165.w,
+                  ),
           ),
           // SizedBox(width: 8.w),
           // display details product=========================
@@ -91,6 +104,7 @@ class CartItemWidget extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       InkWell(
                         onTap: onDeleteTap,
                         child: Image.asset(

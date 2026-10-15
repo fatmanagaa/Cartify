@@ -1,11 +1,12 @@
 import '../../../../domain/entities/response/cart/get/get_cart_response.dart';
 import '../../../model/response/cart/get/get_cart_response_dto.dart';
+import 'get_cart_mapper.dart';
 
 extension GetCartResponseMapper on GetCartResponseDto {
   GetCartResponse toGetCartResponse() {
     return GetCartResponse(
       cartId: cartId,
-      data: data!.toGetCart(),
+      data: data?.toGetCart(),
       numOfCartItems: numOfCartItems,
       status: status,
     );
