@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce_app/api/model/request/auth/login/login_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/auth/register/register_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/cart/add/add_cart_request_dto.dart';
+import 'package:ecommerce_app/api/model/request/cart/put/count_request_dto.dart';
 import 'package:ecommerce_app/api/model/response/auth/auth_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/cart/get/get_cart_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/product/product_response_dto.dart';
@@ -45,4 +46,17 @@ abstract class ApiServices {
 
   @GET(ApiEndpoints.cartEndpoint)
   Future<GetCartResponseDto> getItemsInCart(@Header('token') String token);
+
+  @DELETE(ApiEndpoints.deleteCartApi)
+  Future<GetCartResponseDto> deleteItemsInCart(
+    @Path('productId') String productId,
+    @Header('token') String token,
+  );
+
+  @PUT(ApiEndpoints.deleteCartApi)
+  Future<GetCartResponseDto> updateCountInCart(
+    @Path('productId') String productId,
+    @Body() CountRequestDto countRequest,
+    @Header('token') String token,
+  );
 }

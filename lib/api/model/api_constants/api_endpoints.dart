@@ -6,6 +6,9 @@ class ApiEndpoints {
   static const String brandsEndpoint='brands';
   static const String productsEndpoint='products';
   static const String cartEndpoint='cart';
+  static const String deleteCartApi='cart/{productId}';
+
+
 
 
 

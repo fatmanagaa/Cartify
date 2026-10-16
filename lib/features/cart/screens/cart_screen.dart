@@ -43,9 +43,7 @@ class _CartScreenState extends State<CartScreen> {
           IconButton(
             onPressed: () {},
             icon: ImageIcon(
-              AssetImage(
-                IconsAssets.icSearch,
-              ),
+              AssetImage(IconsAssets.icSearch),
               color: ColorManager.primary,
             ),
           ),
@@ -58,12 +56,54 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<CartScreenViewModel, CartStates>(
+      body: BlocConsumer<CartScreenViewModel, CartStates>(
         bloc: viewModel,
+        listener: (context, state) {
+          if (state is UpdateCountLoadingState ||
+              state is DeleteCartLoadingState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Updating cart...'),
+                duration: Duration(seconds: 1),
+              ),
+            );
+          } else if (state is DeleteCartSuccessState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Item deleted successfully from cart'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+          } else if (state is UpdateCountSuccessState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          } else if (state is DeleteCartErrorState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          } else if (state is UpdateCountErrorState) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          }
+        },
         builder: (context, state) {
           if (state is GetCartLoadingState && viewModel.cartResponse == null) {
             return const MainLoadingWidget();
-          } else if (state is GetCartErrorState && viewModel.cartResponse == null) {
+          } else if (state is GetCartErrorState &&
+              viewModel.cartResponse == null) {
             return MainErrorWidget(
               errorMessage: state.errorMessage,
               onPressed: () {
@@ -94,18 +134,40 @@ class _CartScreenState extends State<CartScreen> {
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       final item = products[index];
+                      final productId =
+                          item.product?.id ?? item.id ?? '';
+
                       return CartItemWidget(
                         imagePath: item.product?.imageCover ??
                             ImageAssets.categoryCardImage,
                         title: item.product?.title ?? 'Product',
                         price: item.price ?? 0,
                         quantity: item.count ?? 1,
-                        onDeleteTap: () {},
-                        onDecrementTap: (value) {},
-                        onIncrementTap: (value) {},
+                        onDeleteTap: () {
+                          if (productId.isNotEmpty) {
+                            viewModel.deleteProductFromCart(productId);
+                          }
+                        },
+                        onDecrementTap: (currentCount) {
+                          if (productId.isNotEmpty) {
+                            int newCount = currentCount - 1;
+                            if (newCount > 0) {
+                              viewModel.updateCount(productId, newCount);
+                            } else {
+                              viewModel.deleteProductFromCart(productId);
+                            }
+                          }
+                        },
+                        onIncrementTap: (currentCount) {
+                          if (productId.isNotEmpty) {
+                            int newCount = currentCount + 1;
+                            viewModel.updateCount(productId, newCount);
+                          }
+                        },
                         size: 40,
                         color: Colors.black,
                         colorName: 'Black',
+                        items: item,
                       );
                     },
                     separatorBuilder: (context, index) =>

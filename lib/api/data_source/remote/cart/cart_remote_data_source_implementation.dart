@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/api/model/request/cart/put/count_request_dto.dart';
 import 'package:ecommerce_app/api/retrofit/api_services.dart';
 import 'package:ecommerce_app/domain/entities/response/cart/get/get_cart_response.dart';
 import 'package:injectable/injectable.dart';
@@ -37,15 +38,46 @@ class CartRemoteDataSourceImplementation implements CartRemoteDataSource {
   }
 
   @override
-  Future<GetCartResponse> getItemsInCart() {
+  Future<GetCartResponse> getItemsInCart() async {
     try {
       var token = SharedPrefsUtils.getData(key: 'token');
-      var getCartResponse = apiServices.getItemsInCart(token.toString());
-      return getCartResponse.then((response) => response.toGetCartResponse());
+      var response = await apiServices.getItemsInCart(token.toString());
+      return response.toGetCartResponse();
     } on DioException catch (e) {
       String message = (e.error as AppException).message;
       throw ServerException(message: message);
     }
+  }
 
+  @override
+  Future<GetCartResponse> deleteItemsInCart(String productId) async {
+    try {
+      var token = SharedPrefsUtils.getData(key: 'token');
+      var response = await apiServices.deleteItemsInCart(
+        productId,
+        token.toString(),
+      );
+      return response.toGetCartResponse();
+    } on DioException catch (e) {
+      String message = (e.error as AppException).message;
+      throw ServerException(message: message);
+    }
+  }
+
+  @override
+  Future<GetCartResponse> updateCountInCart(String productId, int count) async {
+    try {
+      var token = SharedPrefsUtils.getData(key: 'token');
+      CountRequestDto countRequestDto = CountRequestDto(count: '$count');
+      var response = await apiServices.updateCountInCart(
+        productId,
+        countRequestDto,
+        token.toString(),
+      );
+      return response.toGetCartResponse();
+    } on DioException catch (e) {
+      String message = (e.error as AppException).message;
+      throw ServerException(message: message);
+    }
   }
 }

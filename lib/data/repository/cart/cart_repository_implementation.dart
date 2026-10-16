@@ -19,4 +19,14 @@ class CartRepositoryImpl implements CartRepository {
   Future<GetCartResponse> getItemsInCart() {
     return _cartRemoteDataSource.getItemsInCart();
   }
+
+  @override
+  Future<GetCartResponse> deleteItemsInCart(String productId) {
+    return _cartRemoteDataSource.deleteItemsInCart(productId);
+  }
+
+  @override
+  Future<GetCartResponse> updateCountInCart(String productId, int count) {
+    return _cartRemoteDataSource.updateCountInCart(productId, count);
+  }
 }
