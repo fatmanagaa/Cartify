@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/cart/cubit/cart_cubit.dart';
+import '../../features/cart/cubit/cart_states.dart';
+import '../di/di.dart';
 import '../routes_manager/app_routes.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -72,12 +76,31 @@ class HomeScreenAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                    onPressed: () => context.pushNamed(Routes.cartRouteName),
-                    icon: ImageIcon(
-                      AssetImage(IconsAssets.icCart),
-                      color: ColorManager.primary,
-                    ))
+                BlocBuilder<CartScreenViewModel, CartStates>(
+                  bloc: getIt<CartScreenViewModel>(),
+                  builder: (context, state) {
+                    final cartCubit = getIt<CartScreenViewModel>();
+                    return Badge(
+                      label: Text(
+                        '${cartCubit.numOfCartItems}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                      isLabelVisible: cartCubit.numOfCartItems > 0,
+                      backgroundColor: ColorManager.primary,
+                      child: IconButton(
+                        onPressed: () =>
+                            context.pushNamed(Routes.cartRouteName),
+                        icon: ImageIcon(
+                          AssetImage(IconsAssets.icCart),
+                          color: ColorManager.primary,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           )),
