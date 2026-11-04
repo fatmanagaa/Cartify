@@ -4,6 +4,7 @@ import '../../../domain/entities/response/cart/add/add_product_cart_response.dar
 import '../../../domain/repository/cart/cart_repository.dart';
 import '../../data_source/remote/cart/cart_remote_data_source.dart';
 
+
 @Injectable(as: CartRepository)
 class CartRepositoryImpl implements CartRepository {
   final CartRemoteDataSource _cartRemoteDataSource;
