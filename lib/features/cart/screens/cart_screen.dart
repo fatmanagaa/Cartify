@@ -12,6 +12,7 @@ import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_styles.dart';
 import '../../../core/utils/values_manager.dart';
 import '../widgets/cart_item_widget.dart';
+import '../widgets/custom_snack_bar.dart';
 import '../widgets/total_price_and_checkout_botton.dart';
 
 class CartScreen extends StatefulWidget {
@@ -61,41 +62,30 @@ class _CartScreenState extends State<CartScreen> {
         listener: (context, state) {
           if (state is UpdateCountLoadingState ||
               state is DeleteCartLoadingState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Updating cart...'),
-                duration: Duration(seconds: 1),
-              ),
+            CustomSnackBar.show(
+              context,
+              message: 'Updating cart...',
+              duration: const Duration(seconds: 1),
             );
           } else if (state is DeleteCartSuccessState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Item deleted successfully from cart'),
-                backgroundColor: Colors.green,
-                duration: Duration(seconds: 2),
-              ),
+            CustomSnackBar.show(
+              context,
+              message: 'Item deleted successfully from cart',
+              backgroundColor: Colors.green,
             );
           } else if (state is UpdateCountSuccessState) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           } else if (state is DeleteCartErrorState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 2),
-              ),
+            CustomSnackBar.show(
+              context,
+              message: state.errorMessage,
+              backgroundColor: Colors.red,
             );
           } else if (state is UpdateCountErrorState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 2),
-              ),
+            CustomSnackBar.show(
+              context,
+              message: state.errorMessage,
+              backgroundColor: Colors.red,
             );
           }
         },
@@ -134,11 +124,11 @@ class _CartScreenState extends State<CartScreen> {
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       final item = products[index];
-                      final productId =
-                          item.product?.id ?? item.id ?? '';
+                      final productId = item.product?.id ?? item.id ?? '';
 
                       return CartItemWidget(
-                        imagePath: item.product?.imageCover ??
+                        imagePath:
+                            item.product?.imageCover ??
                             ImageAssets.categoryCardImage,
                         title: item.product?.title ?? 'Product',
                         price: item.price ?? 0,
@@ -176,9 +166,10 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 TotalPriceAndCheckoutBotton(
-                  totalPrice:
-                      viewModel.cartResponse?.data?.totalCartPrice ?? 0,
-                  checkoutButtonOnTap: () {},
+                  totalPrice: viewModel.cartResponse?.data?.totalCartPrice ?? 0,
+                  checkoutButtonOnTap: () {
+                    // TODO: Navigate to checkout screen
+                  },
                 ),
                 SizedBox(height: 10.h),
               ],
