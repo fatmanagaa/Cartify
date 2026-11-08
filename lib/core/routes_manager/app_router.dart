@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/core/widget/home_screen_app_bar.dart';
 import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:ecommerce_app/features/cart/screens/cart_screen.dart';
+import 'package:ecommerce_app/features/main_layout/categories/presentation/categories_tab.dart';
 import 'package:ecommerce_app/features/main_layout/main_layout.dart';
 import 'package:ecommerce_app/features/product_details/presentation/screen/product_details.dart';
 import 'package:ecommerce_app/features/products_screen/presentation/screens/products_screen.dart';
@@ -43,6 +45,29 @@ abstract class AppRouter {
         name: Routes.productsScreenRouteName,
         path: Routes.productsScreenRoute,
         builder: (context, state) => const ProductsScreen(),
+      ),
+      GoRoute(
+        name: Routes.subCategoriesRouteName,
+        path: Routes.subCategoriesRoute,
+        builder: (context, state) {
+          final extra = state.extra;
+          final categoryId = extra is Map<String, dynamic>
+              ? extra['categoryId']?.toString()
+              : extra is String
+              ? extra
+              : null;
+          final categoryName = extra is Map<String, dynamic>
+              ? extra['categoryName']?.toString()
+              : null;
+
+          return Scaffold(
+            appBar: const HomeScreenAppBar(automaticallyImplyLeading: true),
+            body: CategoriesTab(
+              categoryId: categoryId,
+              categoryName: categoryName,
+            ),
+          );
+        },
       ),
       GoRoute(
         name: Routes.productDetailsRouteName,

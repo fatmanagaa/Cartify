@@ -11,6 +11,7 @@ import 'package:retrofit/retrofit.dart';
 import '../model/api_constants/api_endpoints.dart';
 import '../model/response/cart/add/add_product_cart_response_dto.dart';
 import '../model/response/category_brand/category_or_brand_dto_response.dart';
+import '../model/response/sub_categories/sub_categories_response_dto.dart';
 
 part 'api_services.g.dart';
 
@@ -59,4 +60,8 @@ abstract class ApiServices {
     @Body() CountRequestDto countRequest,
     @Header('token') String token,
   );
+  @GET(ApiEndpoints.subCategoriesOnCategory)
+  Future<SubCategoriesResponse> getSubCategories(
+      @Path('categoryId') String categoryId,
+      );
 }

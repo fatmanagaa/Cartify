@@ -5,6 +5,8 @@ class Routes {
   static const String mainRoute = "/main";
   static const String productsScreenRouteName = 'products';
   static const String productsScreenRoute = "/products";
+  static const String subCategoriesRouteName = 'sub-categories';
+  static const String subCategoriesRoute = "/sub-categories";
   static const String productDetailsRouteName = 'product-details';
   static const String productDetails = '/productDetails';
   static const String wishRouteName = 'wish';
@@ -13,5 +15,5 @@ class Routes {
   static const String signInRoute = "/signIn";
   static const String signUpRouteName = 'sign-up';
   static const String signUpRoute = "/signUp";
-  static const String splashScreen="/splash";
+  static const String splashScreen = "/splash";
 }

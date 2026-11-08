@@ -7,6 +7,8 @@ class ApiEndpoints {
   static const String productsEndpoint='products';
   static const String cartEndpoint='cart';
   static const String deleteCartApi='cart/{productId}';
+  static const String subCategoriesOnCategory =
+      'categories/{categoryId}/subcategories';
 
 
 

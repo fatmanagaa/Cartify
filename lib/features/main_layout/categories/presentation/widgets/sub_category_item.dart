@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/values_manager.dart';
@@ -14,7 +15,10 @@ class SubCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.productsScreenRouteName),
+      onTap: () {
+        navigation();
+        context.pushNamed(Routes.productsScreenRouteName);
+      },
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,15 +31,27 @@ class SubCategoryItem extends StatelessWidget {
                   border: Border.all(color: ColorManager.primary, width: 2)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.s10),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
+                child: image.startsWith('http')
+                    ? Image.network(
+                        image,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          ImageAssets.subcategoryCardImage,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),
           Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: getRegularStyle(color: ColorManager.primary),
           )
         ],

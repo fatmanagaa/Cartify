@@ -16,7 +16,10 @@ class CustomCategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(Routes.productsScreenRouteName),
+      onTap: () => context.pushNamed(
+        Routes.subCategoriesRouteName,
+        extra: {'categoryId': category.id, 'categoryName': category.name},
+      ),
       child: Column(
         children: [
           ClipRRect(
@@ -24,16 +27,12 @@ class CustomCategoryWidget extends StatelessWidget {
             child: Container(
               height: 100.h,
               width: 100.w,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
               child: CachedNetworkImage(
                 imageUrl: category.image ?? "",
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Center(
-                  child: CircularProgressIndicator(
-                    color: ColorManager.primary,
-                  ),
+                  child: CircularProgressIndicator(color: ColorManager.primary),
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
@@ -42,8 +41,10 @@ class CustomCategoryWidget extends StatelessWidget {
           SizedBox(height: 8.h),
           Text(
             category.name ?? "",
-            style:
-                getRegularStyle(color: ColorManager.darkBlue, fontSize: 14.sp),
+            style: getRegularStyle(
+              color: ColorManager.darkBlue,
+              fontSize: 14.sp,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
