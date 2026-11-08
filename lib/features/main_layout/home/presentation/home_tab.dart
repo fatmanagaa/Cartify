@@ -72,7 +72,13 @@ class _HomeTabState extends State<HomeTab> {
               SizedBox(height: 24.h),
               CustomSectionBar(
                 sectionNname: 'Categories',
-                function: () => context.pushNamed(Routes.productsScreenRouteName),
+                function: () => context.pushNamed(
+                  Routes.subCategoriesRouteName,
+                  extra: {
+                    'categoryId': viewModel.categoriesList?.first.id,
+                    'categoryName': viewModel.categoriesList?.first.name,
+                  },
+                ),
               ),
               BlocBuilder<HomeTabViewModel, HomeTabStates>(
                 bloc: viewModel,
@@ -109,7 +115,8 @@ class _HomeTabState extends State<HomeTab> {
               SizedBox(height: 12.h),
               CustomSectionBar(
                 sectionNname: 'Brands',
-                function: () => context.pushNamed(Routes.productsScreenRouteName),
+                function: () =>
+                    context.pushNamed(Routes.productsScreenRouteName),
               ),
               BlocBuilder<HomeTabViewModel, HomeTabStates>(
                 bloc: viewModel,
@@ -145,7 +152,8 @@ class _HomeTabState extends State<HomeTab> {
               ),
               CustomSectionBar(
                 sectionNname: 'Most Selling Products',
-                function: () => context.pushNamed(Routes.productsScreenRouteName),
+                function: () =>
+                    context.pushNamed(Routes.productsScreenRouteName),
               ),
               SizedBox(
                 child: SizedBox(
