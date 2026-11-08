@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/values_manager.dart';
-import '../../../../core/widget/home_screen_app_bar.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -31,9 +30,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeScreenAppBar(
-        automaticallyImplyLeading: true,
-      ),
       body: BlocListener<CartScreenViewModel, CartStates>(
         bloc: getIt<CartScreenViewModel>(),
         listener: (context, state) {

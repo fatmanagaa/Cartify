@@ -4,7 +4,7 @@ part 'data_dto.g.dart';
 
 @JsonSerializable()
 class Data {
-  @JsonKey(name: "id")
+  @JsonKey(name: "_id")
   final String? id;
   @JsonKey(name: "name")
   final String? name;
