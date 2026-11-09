@@ -59,6 +59,7 @@ class CategoriesTabViewModel extends Cubit<CategoriesTabStates> {
 
   void getSubCategories(String categoryId) async {
     try {
+      subCategoriesList = null;
       emit(SubCategoryLoadingState());
       var response = await _getAllSubCategoriesUseCase.invoke(categoryId);
       subCategoriesList = response;

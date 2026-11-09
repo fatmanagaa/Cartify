@@ -16,14 +16,7 @@ import 'package:go_router/go_router.dart';
 import 'sub_category_item.dart';
 
 class SubCategoriesList extends StatelessWidget {
-  final String? selectedCategoryId;
-  final String? selectedCategoryName;
-
-  const SubCategoriesList({
-    super.key,
-    this.selectedCategoryId,
-    this.selectedCategoryName,
-  });
+  const SubCategoriesList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +27,13 @@ class SubCategoriesList extends StatelessWidget {
         var subCategories = viewModel.subCategoriesList;
 
         CategoryBrand? selectedCategory;
-        if (selectedCategoryId != null && selectedCategoryId!.isNotEmpty) {
-          if (categories != null && categories.isNotEmpty) {
-            selectedCategory = categories.firstWhere(
-              (category) => category.id == selectedCategoryId,
-              orElse: () => categories.first,
-            );
-          }
-        } else if (categories != null &&
+        if (categories != null &&
             categories.isNotEmpty &&
             viewModel.selectedIndex < categories.length) {
           selectedCategory = categories[viewModel.selectedIndex];
         }
 
-        String categoryTitle =
-            selectedCategoryName ?? selectedCategory?.name ?? 'Category';
+        String categoryTitle = selectedCategory?.name ?? 'Category';
         String categoryImage =
             selectedCategory?.image ?? ImageAssets.categoryCardImage;
 
@@ -110,7 +95,6 @@ class SubCategoriesList extends StatelessWidget {
               else if (subCategories != null)
                 SliverGrid(
                   delegate: SliverChildBuilderDelegate(
-                    childCount: subCategories.length,
                     (context, index) {
                       final subCategory = subCategories[index];
                       return SubCategoryItem(
@@ -119,6 +103,7 @@ class SubCategoriesList extends StatelessWidget {
                         goToCategoryProductsListScreen,
                       );
                     },
+                    childCount: subCategories.length,
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,

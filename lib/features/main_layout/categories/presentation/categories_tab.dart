@@ -4,7 +4,6 @@ import 'package:ecommerce_app/features/main_layout/categories/presentation/cubit
 import 'package:ecommerce_app/features/main_layout/categories/presentation/widgets/categories_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'widgets/sub_categories_list.dart';
 
 class CategoriesTab extends StatefulWidget {
@@ -40,10 +39,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
           children: [
             const CategoriesList(),
             const SizedBox(width: AppSize.s16),
-            SubCategoriesList(
-              selectedCategoryId: widget.categoryId,
-              selectedCategoryName: widget.categoryName,
-            ),
+            const SubCategoriesList(),
           ],
         ),
       ),
