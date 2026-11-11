@@ -7,7 +7,7 @@ part of 'data_dto.dart';
 // **************************************************************************
 
 Data _$DataFromJson(Map<String, dynamic> json) => Data(
-  id: json['_id'] as String?,
+  id: json['id'] as String?,
   name: json['name'] as String?,
   slug: json['slug'] as String?,
   category: json['category'] as String?,
@@ -16,7 +16,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
 );
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
-  '_id': instance.id,
+  'id': instance.id,
   'name': instance.name,
   'slug': instance.slug,
   'category': instance.category,

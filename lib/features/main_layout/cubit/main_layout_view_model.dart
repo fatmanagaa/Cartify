@@ -3,7 +3,7 @@ import 'package:ecommerce_app/features/main_layout/cubit/states/main_layout_stat
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import '../../products_screen/presentation/screens/products_screen.dart';
-import '../favourite/presentation/favourite_screen.dart';
+import '../wishlist/presentation/wishlist_screen.dart';
 import '../home/presentation/home_tab.dart';
 import '../profile_tab/presentation/profile_tab.dart';
 
@@ -15,7 +15,7 @@ class MainLayoutViewModel extends Cubit<MainLayoutStates> {
   List<Widget> tabs = [
     const HomeTab(),
     const ProductsScreen(),
-    const FavouriteScreen(),
+    const WishlistScreen(),
     const ProfileTab(),
   ];
 

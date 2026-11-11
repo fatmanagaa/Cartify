@@ -5,15 +5,35 @@ import '../utils/app_colors.dart';
 
 class HeartButton extends StatefulWidget {
   final void Function()? onTap;
-  const HeartButton({super.key, required this.onTap});
+  final bool isFavorite;
+  const HeartButton({super.key, required this.onTap, this.isFavorite = false});
 
   @override
   State<HeartButton> createState() => _HeartButtonState();
 }
 
 class _HeartButtonState extends State<HeartButton> {
-  String heartIcon = IconsAssets.icHeart;
-  bool isClicked = false;
+  late String heartIcon;
+  late bool isClicked;
+
+  @override
+  void initState() {
+    super.initState();
+    isClicked = widget.isFavorite;
+    heartIcon = isClicked ? IconsAssets.icClickedHeart : IconsAssets.icHeart;
+  }
+
+  @override
+  void didUpdateWidget(covariant HeartButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isFavorite != widget.isFavorite) {
+      setState(() {
+        isClicked = widget.isFavorite;
+        heartIcon = isClicked ? IconsAssets.icClickedHeart : IconsAssets.icHeart;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
