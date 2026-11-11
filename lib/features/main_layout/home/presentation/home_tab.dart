@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/widget/product_card.dart';
 import 'widgets/custom_ads_widget.dart';
 import 'widgets/custom_section_bar.dart';
 
@@ -151,31 +150,7 @@ class _HomeTabState extends State<HomeTab> {
                   }
                 },
               ),
-              CustomSectionBar(
-                sectionNname: 'Most Selling Products',
-                function: () =>
-                    context.pushNamed(Routes.productsScreenRouteName),
-              ),
-              SizedBox(
-                child: SizedBox(
-                  height: 360.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return const ProductCard(
-                        title: "Nike Air Jordon",
-                        description:
-                            "Nike is a multinational corporation that designs, develops, and sells athletic footwear ,apparel, and accessories",
-                        rating: 4.5,
-                        price: 1100,
-                        priceBeforeDiscound: 1500,
-                        image: ImageAssets.categoryHomeImage,
-                      );
-                    },
-                    itemCount: 20,
-                  ),
-                ),
-              ),
+
             ],
           ),
         ],
