@@ -1,17 +1,26 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'core/cache/shared_prefs_utils.dart';
 import 'core/di/di.dart';
 import 'core/routes_manager/app_router.dart';
 import 'core/utils/app_theme.dart';
 import 'core/utils/my_bloc_observer.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SharedPrefsUtils.init();
+
+  try {
+    await SharedPrefsUtils.init();
+  } catch (e, stackTrace) {
+    debugPrint('SharedPrefsUtils init failed: $e');
+    debugPrintStack(stackTrace: stackTrace);
+  }
+
   Bloc.observer = MyBlocObserver();
   configureDependencies();
+
   runApp(const MainApp());
 }
 

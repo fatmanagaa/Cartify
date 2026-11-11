@@ -12,7 +12,6 @@ import 'package:ecommerce_app/features/main_layout/categories/presentation/widge
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import 'sub_category_item.dart';
 
 class SubCategoriesList extends StatelessWidget {
