@@ -1,5 +1,5 @@
 class Data {
-  final String? Id;
+  final String? id;
   final String? name;
   final String? slug;
   final String? category;
@@ -7,7 +7,7 @@ class Data {
   final String? updatedAt;
 
   Data({
-    this.Id,
+    this.id,
     this.name,
     this.slug,
     this.category,

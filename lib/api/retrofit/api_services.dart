@@ -3,10 +3,14 @@ import 'package:ecommerce_app/api/model/request/auth/login/login_request_dto.dar
 import 'package:ecommerce_app/api/model/request/auth/register/register_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/cart/add/add_cart_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/cart/put/count_request_dto.dart';
+import 'package:ecommerce_app/api/model/request/wishlist/add_product_to_wishlist_request_dto.dart';
 import 'package:ecommerce_app/api/model/response/auth/auth_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/cart/get/get_cart_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/product/product_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/product/single_product_response_dto.dart';
+import 'package:ecommerce_app/api/model/response/wish_list/add_to_wishlist_response_dto.dart';
+import 'package:ecommerce_app/api/model/response/wish_list/delete_from_wishlist_response_dto.dart';
+import 'package:ecommerce_app/api/model/response/wish_list/get_wishlist_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import '../model/api_constants/api_endpoints.dart';
 import '../model/response/cart/add/add_product_cart_response_dto.dart';
@@ -62,6 +66,23 @@ abstract class ApiServices {
   );
   @GET(ApiEndpoints.subCategoriesOnCategory)
   Future<SubCategoriesResponse> getSubCategories(
-      @Path('categoryId') String categoryId,
-      );
+    @Path('categoryId') String categoryId,
+  );
+
+  @POST(ApiEndpoints.wishlist)
+  Future<AddToWishlistResponseDto> addToWishlist(
+    @Body() AddProductToWishlistRequestDto request,
+    @Header('token') String token,
+  );
+
+  @DELETE(ApiEndpoints.removeFromWishlist)
+  Future<DeleteFromWishlistResponseDto> deleteFromWishlist(
+    @Path('productId') String productId,
+    @Header('token') String token,
+  );
+
+  @GET(ApiEndpoints.wishlist)
+  Future<GetWishlistDto> getWishlist(
+    @Header('token') String token,
+  );
 }

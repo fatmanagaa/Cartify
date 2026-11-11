@@ -1,5 +1,8 @@
+import 'package:ecommerce_app/core/di/di.dart';
 import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/domain/entities/response/product/product.dart';
+import 'package:ecommerce_app/features/cart/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/main_layout/wishlist/presentation/cubit/wishlist_view_model.dart';
 import 'package:go_router/go_router.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
@@ -103,7 +106,17 @@ class ProductCard extends StatelessWidget {
                           ],
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            final id = product?.id ?? productId;
+                            if (id != null) {
+                              final wishlistVm = getIt<WishlistViewModel>();
+                              if (wishlistVm.isWishlisted(id)) {
+                                wishlistVm.deleteFromWishlist(id);
+                              } else {
+                                wishlistVm.addToWishlist(id);
+                              }
+                            }
+                          },
                           child: Image.asset(
                             IconsAssets.icWithList,
                             color: ColorManager.primary,
@@ -179,7 +192,19 @@ class ProductCard extends StatelessWidget {
                             ],
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              final id = product?.id ?? productId;
+                              if (id != null) {
+                                getIt<CartScreenViewModel>().addProductToCart(id);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text('Product added to cart'),
+                                    backgroundColor: ColorManager.primary,
+                                    duration: const Duration(seconds: 1),
+                                  ),
+                                );
+                              }
+                            },
                             child: Icon(
                               Icons.add_circle_rounded,
                               color: ColorManager.primary,

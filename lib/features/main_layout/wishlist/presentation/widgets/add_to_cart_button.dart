@@ -16,17 +16,23 @@ class AddToCartButton extends StatelessWidget {
       width: 100.w,
       height: 36.h,
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppSize.s14.r)),
-              padding: EdgeInsets.symmetric(horizontal: AppSize.s1.w),
-              backgroundColor: ColorManager.primary),
-          onPressed: onPressed,
-          child: Text(text,
-              style: getRegularStyle(
-                color: ColorManager.white,
-                fontSize: AppSize.s14.sp,
-              ))),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.s14.r),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: AppSize.s1.w),
+          backgroundColor: ColorManager.primary,
+        ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: getRegularStyle(
+            color: ColorManager.white,
+            fontSize: AppSize.s14.sp,
+          ),
+        ),
+      ),
     );
   }
 }
+
