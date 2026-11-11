@@ -4,7 +4,10 @@ import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
 import 'package:ecommerce_app/core/widget/heart_button.dart';
 import 'package:ecommerce_app/domain/entities/response/product/product.dart';
 import 'package:ecommerce_app/features/cart/cubit/cart_cubit.dart';
+import 'package:ecommerce_app/features/main_layout/wishlist/presentation/cubit/wishlist_states.dart';
+import 'package:ecommerce_app/features/main_layout/wishlist/presentation/cubit/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -80,7 +83,20 @@ class CustomProductWidget extends StatelessWidget {
                   Positioned(
                     top: height * 0.01,
                     right: width * 0.02,
-                    child: HeartButton(onTap: () {}),
+                    child: BlocBuilder<WishlistViewModel, WishlistStates>(
+                      bloc: getIt<WishlistViewModel>(),
+                      builder: (context, state) {
+                        final isFav = getIt<WishlistViewModel>().isWishlisted(product.id);
+                        return HeartButton(
+                          isFavorite: isFav,
+                          onTap: () {
+                            if (product.id != null) {
+                              getIt<WishlistViewModel>().toggleWishlist(product.id!);
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

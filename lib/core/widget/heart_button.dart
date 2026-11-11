@@ -26,7 +26,8 @@ class _HeartButtonState extends State<HeartButton> {
   @override
   void didUpdateWidget(covariant HeartButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.isFavorite != widget.isFavorite) {
+    if (oldWidget.isFavorite != widget.isFavorite ||
+        isClicked != widget.isFavorite) {
       setState(() {
         isClicked = widget.isFavorite;
         heartIcon = isClicked ? IconsAssets.icClickedHeart : IconsAssets.icHeart;

@@ -60,6 +60,7 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + 60.h),
       child: Column(
         children: [
           CustomAdsWidget(

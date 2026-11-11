@@ -6,6 +6,9 @@ import 'package:ecommerce_app/features/cart/cubit/cart_states.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/product_screen_states.dart';
 import 'package:ecommerce_app/features/products_screen/cubit/product_screen_view_model.dart';
 import 'package:ecommerce_app/features/products_screen/presentation/widgets/custom_product_widget.dart';
+import 'package:ecommerce_app/core/utils/app_colors.dart';
+import 'package:ecommerce_app/features/main_layout/wishlist/presentation/cubit/wishlist_states.dart';
+import 'package:ecommerce_app/features/main_layout/wishlist/presentation/cubit/wishlist_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,48 +23,103 @@ class ProductsScreen extends StatefulWidget {
 
 class _ProductsScreenState extends State<ProductsScreen> {
   final ProductScreenViewModel viewModel = getIt<ProductScreenViewModel>();
+  final WishlistViewModel wishlistViewModel = getIt<WishlistViewModel>();
 
   @override
   void initState() {
     super.initState();
     viewModel.getProducts();
+    wishlistViewModel.getWishlist(showLoading: false);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<CartScreenViewModel, CartStates>(
-        bloc: getIt<CartScreenViewModel>(),
-        listener: (context, state) {
-          if (state is AddCartLoadingState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Adding product to cart...'),
-                duration: Duration(seconds: 1),
-              ),
-            );
-          } else if (state is AddCartSuccessState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                    'Product added successfully! Items in cart: ${state.numOfCartItems}'),
-                backgroundColor: Colors.green,
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          } else if (state is AddCartErrorState) {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<CartScreenViewModel, CartStates>(
+            bloc: getIt<CartScreenViewModel>(),
+            listener: (context, state) {
+              if (state is AddCartLoadingState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Adding product to cart...'),
+                    behavior: SnackBarBehavior.floating,
+                    duration: Duration(seconds: 1),
+                  ),
+                );
+              } else if (state is AddCartSuccessState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        'Product added successfully! Items in cart: ${state.numOfCartItems}'),
+                    backgroundColor: Colors.green,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              } else if (state is AddCartErrorState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ),
+          BlocListener<WishlistViewModel, WishlistStates>(
+            bloc: wishlistViewModel,
+            listener: (context, state) {
+              if (state is AddToWishlistSuccessState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.green,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              } else if (state is DeleteFromWishlistSuccessState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: ColorManager.primary,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              } else if (state is AddToWishlistErrorState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              } else if (state is DeleteFromWishlistErrorState) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                    behavior: SnackBarBehavior.floating,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<ProductScreenViewModel, ProductScreenStates>(
           bloc: viewModel,
           builder: (context, state) {
@@ -77,7 +135,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 return const Center(child: Text("No products found"));
               }
               return Padding(
-                padding: EdgeInsets.all(AppPadding.p16),
+                padding: EdgeInsets.only(
+                  left: AppPadding.p16,
+                  right: AppPadding.p16,
+                  top: AppPadding.p16,
+                  bottom: MediaQuery.of(context).padding.bottom + 60,
+                ),
                 child: GridView.builder(
                   itemCount: viewModel.productsList!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -23,16 +23,18 @@ class WishlistViewModel extends Cubit<WishlistStates> {
   List<Product> wishlistProducts = [];
   Set<String> wishlistProductIds = {};
 
-  Future<void> getWishlist() async {
+  Future<void> getWishlist({bool showLoading = true}) async {
     try {
-      emit(WishlistLoadingState());
+      if (showLoading && wishlistProducts.isEmpty) {
+        emit(WishlistLoadingState());
+      }
       var response = await _getWishlistUseCase.invoke();
       wishlistProducts = response.data ?? [];
       wishlistProductIds = wishlistProducts
           .map((p) => p.id)
           .whereType<String>()
           .toSet();
-      emit(WishlistSuccessState(wishlistProducts: wishlistProducts));
+      emit(WishlistSuccessState(wishlistProducts: List.from(wishlistProducts)));
     } on AppException catch (e) {
       emit(WishlistErrorState(errorMessage: e.message));
     } catch (e) {
@@ -45,11 +47,13 @@ class WishlistViewModel extends Cubit<WishlistStates> {
       emit(AddToWishlistLoadingState());
       var response = await _addToWishlistUseCase.invoke(productId);
       wishlistProductIds.add(productId);
-      emit(AddToWishlistSuccessState(
-        message: response.message ?? 'Added to wishlist successfully',
-        productIds: response.data,
-      ));
-      getWishlist();
+      emit(
+        AddToWishlistSuccessState(
+          message: response.message ?? 'Product added to wishlist successfully',
+          productIds: response.data,
+        ),
+      );
+      await getWishlist(showLoading: false);
     } on AppException catch (e) {
       emit(AddToWishlistErrorState(errorMessage: e.message));
     } catch (e) {
@@ -63,15 +67,25 @@ class WishlistViewModel extends Cubit<WishlistStates> {
       var response = await _deleteFromWishlistUseCase.invoke(productId);
       wishlistProductIds.remove(productId);
       wishlistProducts.removeWhere((p) => p.id == productId);
-      emit(DeleteFromWishlistSuccessState(
-        message: response.message ?? 'Removed from wishlist successfully',
-        productIds: response.data,
-      ));
+      emit(
+        DeleteFromWishlistSuccessState(
+          message: response.message ?? 'Product removed from wishlist successfully',
+          productIds: response.data,
+        ),
+      );
       emit(WishlistSuccessState(wishlistProducts: List.from(wishlistProducts)));
     } on AppException catch (e) {
       emit(DeleteFromWishlistErrorState(errorMessage: e.message));
     } catch (e) {
       emit(DeleteFromWishlistErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> toggleWishlist(String productId) async {
+    if (isWishlisted(productId)) {
+      await deleteFromWishlist(productId);
+    } else {
+      await addToWishlist(productId);
     }
   }
 

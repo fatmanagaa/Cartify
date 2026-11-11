@@ -25,7 +25,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
   @override
   void initState() {
     super.initState();
-    viewModel.getWishlist();
+    viewModel.getWishlist(showLoading: viewModel.wishlistProducts.isEmpty);
   }
 
   @override
@@ -34,32 +34,39 @@ class _WishlistScreenState extends State<WishlistScreen> {
       bloc: viewModel,
       listener: (context, state) {
         if (state is DeleteFromWishlistSuccessState) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),
               backgroundColor: ColorManager.primary,
+              behavior: SnackBarBehavior.floating,
               duration: const Duration(seconds: 2),
             ),
           );
         } else if (state is AddToWishlistSuccessState) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),
-              backgroundColor: ColorManager.primary,
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
               duration: const Duration(seconds: 2),
             ),
           );
         } else if (state is DeleteFromWishlistErrorState) {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errorMessage),
               backgroundColor: Colors.red,
+              behavior: SnackBarBehavior.floating,
             ),
           );
         }
       },
       builder: (context, state) {
-        if (state is WishlistLoadingState && viewModel.wishlistProducts.isEmpty) {
+        if (state is WishlistLoadingState &&
+            viewModel.wishlistProducts.isEmpty) {
           return const Center(child: MainLoadingWidget());
         }
 
@@ -100,7 +107,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       Text(
                         'Explore more and add products you love!',
                         style: getRegularStyle(
-                          color: ColorManager.appBarTitleColor.withValues(alpha: 0.7),
+                          color: ColorManager.appBarTitleColor.withValues(
+                            alpha: 0.7,
+                          ),
                           fontSize: AppSize.s14.sp,
                         ),
                       ),
@@ -116,9 +125,11 @@ class _WishlistScreenState extends State<WishlistScreen> {
           color: ColorManager.primary,
           onRefresh: () => viewModel.getWishlist(),
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSize.s14.w,
-              vertical: AppSize.s10.h,
+            padding: EdgeInsets.only(
+              left: AppSize.s14.w,
+              right: AppSize.s14.w,
+              top: AppSize.s10.h,
+              bottom: MediaQuery.of(context).padding.bottom + 60.h,
             ),
             child: ListView.builder(
               itemCount: viewModel.wishlistProducts.length,
@@ -135,11 +146,14 @@ class _WishlistScreenState extends State<WishlistScreen> {
                     },
                     onAddToCart: () {
                       if (product.id != null) {
-                        getIt<CartScreenViewModel>().addProductToCart(product.id!);
+                        getIt<CartScreenViewModel>().addProductToCart(
+                          product.id!,
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: const Text('Product added to cart'),
                             backgroundColor: ColorManager.primary,
+                            behavior: SnackBarBehavior.floating,
                             duration: const Duration(seconds: 2),
                           ),
                         );
