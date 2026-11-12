@@ -23,6 +23,9 @@ class AuthRepositoryImplementation implements AuthRepository {
     if (response.token != null && response.token!.isNotEmpty) {
       await authLocalDataSource.saveToken(response.token!);
     }
+    if (response.user != null) {
+      await authLocalDataSource.saveUser(response.user!);
+    }
     return response;
   }
 
@@ -31,6 +34,9 @@ class AuthRepositoryImplementation implements AuthRepository {
     final response = await authRemoteDataSource.register(registerRequest);
     if (response.token != null && response.token!.isNotEmpty) {
       await authLocalDataSource.saveToken(response.token!);
+    }
+    if (response.user != null) {
+      await authLocalDataSource.saveUser(response.user!);
     }
     return response;
   }

@@ -7,6 +7,8 @@ extension UserMapper on UserDto {
     return User(
       email: email,
       name: name,
+      role: role,
+      phone: phone,
     );
   }
 }
