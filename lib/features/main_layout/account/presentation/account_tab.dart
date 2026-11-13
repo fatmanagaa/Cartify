@@ -26,6 +26,7 @@ class AccountTab extends StatefulWidget {
 
 class AccountTabState extends State<AccountTab> {
   final AccountViewModel _viewModel = getIt<AccountViewModel>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late final TextEditingController _fullNameController;
   late final TextEditingController _emailController;
@@ -33,19 +34,19 @@ class AccountTabState extends State<AccountTab> {
   late final TextEditingController _mobileController;
   late final TextEditingController _addressController;
 
-  bool _isFullNameReadOnly = true;
-  bool _isEmailReadOnly = true;
-  bool _isMobileReadOnly = true;
-  bool _isAddressReadOnly = true;
-
   @override
   void initState() {
     super.initState();
-    _fullNameController = TextEditingController();
-    _emailController = TextEditingController();
+    final user = _viewModel.currentUser;
+    _fullNameController = TextEditingController(text: user?.name ?? '');
+    _emailController = TextEditingController(text: user?.email ?? '');
     _passwordController = TextEditingController(text: '************');
-    _mobileController = TextEditingController();
-    _addressController = TextEditingController();
+    _mobileController = TextEditingController(text: user?.phone ?? '');
+    _addressController = TextEditingController(
+      text: _viewModel.addresses.isNotEmpty
+          ? _viewModel.addresses.first.details ?? ''
+          : '',
+    );
 
     _viewModel.loadAccountData();
   }
@@ -185,16 +186,18 @@ class AccountTabState extends State<AccountTab> {
   }
 
   void _saveProfileChanges() {
-    _viewModel.updateUserData(
-      name: _fullNameController.text,
-      email: _emailController.text,
-      phone: _mobileController.text,
-    );
-    if (_addressController.text.isNotEmpty) {
-      _viewModel.addAddress(
-        details: _addressController.text,
+    if (_formKey.currentState?.validate() ?? false) {
+      _viewModel.updateUserData(
+        name: _fullNameController.text,
+        email: _emailController.text,
         phone: _mobileController.text,
       );
+      if (_addressController.text.isNotEmpty) {
+        _viewModel.addAddress(
+          details: _addressController.text,
+          phone: _mobileController.text,
+        );
+      }
     }
   }
 
@@ -220,10 +223,18 @@ class AccountTabState extends State<AccountTab> {
             DialogUtils.showLoading(context, message: 'Updating profile...');
           } else if (state is UpdateUserDataSuccessState) {
             DialogUtils.hideLoading(context);
-            DialogUtils.showMessage(
-              context,
-              message: state.message,
-              posActionName: 'Ok',
+            showDialog(
+              context: context,
+              builder: (dialogContext) => AlertDialog(
+                title: const Text('Success'),
+                content: Text(state.message),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
             );
             if (state.updatedUser != null) {
               if (state.updatedUser!.name != null && state.updatedUser!.name!.isNotEmpty) {
@@ -238,10 +249,18 @@ class AccountTabState extends State<AccountTab> {
             }
           } else if (state is UpdateUserDataErrorState) {
             DialogUtils.hideLoading(context);
-            DialogUtils.showMessage(
-              context,
-              message: state.errorMessage,
-              posActionName: 'Ok',
+            showDialog(
+              context: context,
+              builder: (dialogContext) => AlertDialog(
+                title: const Text('Error'),
+                content: Text(state.errorMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialogContext),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
             );
           } else if (state is ChangePasswordLoadingState) {
             DialogUtils.showLoading(context, message: 'Changing password...');
@@ -340,157 +359,116 @@ class AccountTabState extends State<AccountTab> {
                     },
                   ),
                   SizedBox(height: 16.h),
-                  BuildTextField(
-                    borderBackgroundColor:
-                        ColorManager.primary.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(15.r),
-                    readOnly: _isFullNameReadOnly,
-                    backgroundColor: ColorManager.white,
-                    hint: 'Enter your full name',
-                    label: 'Your full name',
-                    controller: _fullNameController,
-                    labelTextStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
-                    textStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
-                    suffixIcon: IconButton(
-                      icon: _isFullNameReadOnly
-                          ? SvgPicture.asset(SvgAssets.edit)
-                          : Icon(Icons.check_circle, color: ColorManager.primary),
-                      onPressed: () {
-                        setState(() {
-                          if (!_isFullNameReadOnly) {
-                            _viewModel.updateUserData(
-                              name: _fullNameController.text,
-                            );
-                          }
-                          _isFullNameReadOnly = !_isFullNameReadOnly;
-                        });
-                      },
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BuildTextField(
+                          borderBackgroundColor:
+                              ColorManager.primary.withValues(alpha: .4),
+                          borderRadius: BorderRadius.circular(15.r),
+                          backgroundColor: ColorManager.white,
+                          hint: 'Enter your full name',
+                          label: 'Your full name',
+                          controller: _fullNameController,
+                          labelTextStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
+                          textStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(SvgAssets.edit),
+                            onPressed: () {},
+                          ),
+                          textInputType: TextInputType.text,
+                          validation: AppValidators.validateFullName,
+                        ),
+                        SizedBox(height: 14.h),
+                        BuildTextField(
+                          borderBackgroundColor:
+                              ColorManager.primary.withValues(alpha: .4),
+                          borderRadius: BorderRadius.circular(15.r),
+                          backgroundColor: ColorManager.white,
+                          hint: 'Enter your email address',
+                          label: 'Your E-mail',
+                          controller: _emailController,
+                          labelTextStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
+                          textStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(SvgAssets.edit),
+                            onPressed: () {},
+                          ),
+                          textInputType: TextInputType.emailAddress,
+                          validation: AppValidators.validateEmail,
+                        ),
+                        SizedBox(height: 14.h),
+                        BuildTextField(
+                          controller: _passwordController,
+                          borderBackgroundColor:
+                              ColorManager.primary.withValues(alpha: .4),
+                          borderRadius: BorderRadius.circular(15.r),
+                          readOnly: true,
+                          backgroundColor: ColorManager.white,
+                          hint: 'Enter your password',
+                          label: 'Your password',
+                          isObscured: true,
+                          labelTextStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
+                          textStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(SvgAssets.edit),
+                            onPressed: () {
+                              _showChangePasswordDialog(context);
+                            },
+                          ),
+                          textInputType: TextInputType.text,
+                          validation: AppValidators.validatePassword,
+                        ),
+                        SizedBox(height: 14.h),
+                        BuildTextField(
+                          controller: _mobileController,
+                          borderBackgroundColor:
+                              ColorManager.primary.withValues(alpha: .4),
+                          borderRadius: BorderRadius.circular(15.r),
+                          backgroundColor: ColorManager.white,
+                          hint: 'Enter your mobile no.',
+                          label: 'Your mobile number',
+                          labelTextStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
+                          textStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(SvgAssets.edit),
+                            onPressed: () {},
+                          ),
+                          textInputType: TextInputType.phone,
+                          validation: AppValidators.validatePhoneNumber,
+                        ),
+                        SizedBox(height: 14.h),
+                        BuildTextField(
+                          controller: _addressController,
+                          borderBackgroundColor:
+                              ColorManager.primary.withValues(alpha: .4),
+                          borderRadius: BorderRadius.circular(15.r),
+                          backgroundColor: ColorManager.white,
+                          hint: 'Enter your address',
+                          label: 'Your Address',
+                          labelTextStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
+                          textStyle: getMediumStyle(
+                              color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
+                          suffixIcon: IconButton(
+                            icon: SvgPicture.asset(SvgAssets.edit),
+                            onPressed: () {},
+                          ),
+                          textInputType: TextInputType.streetAddress,
+                          validation: AppValidators.validateFullName,
+                        ),
+                      ],
                     ),
-                    textInputType: TextInputType.text,
-                    validation: AppValidators.validateFullName,
-                  ),
-                  SizedBox(height: 14.h),
-                  BuildTextField(
-                    borderBackgroundColor:
-                        ColorManager.primary.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(15.r),
-                    readOnly: _isEmailReadOnly,
-                    backgroundColor: ColorManager.white,
-                    hint: 'Enter your email address',
-                    label: 'Your E-mail',
-                    controller: _emailController,
-                    labelTextStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
-                    textStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
-                    suffixIcon: IconButton(
-                      icon: _isEmailReadOnly
-                          ? SvgPicture.asset(SvgAssets.edit)
-                          : Icon(Icons.check_circle, color: ColorManager.primary),
-                      onPressed: () {
-                        setState(() {
-                          if (!_isEmailReadOnly) {
-                            _viewModel.updateUserData(
-                              email: _emailController.text,
-                            );
-                          }
-                          _isEmailReadOnly = !_isEmailReadOnly;
-                        });
-                      },
-                    ),
-                    textInputType: TextInputType.emailAddress,
-                    validation: AppValidators.validateEmail,
-                  ),
-                  SizedBox(height: 14.h),
-                  BuildTextField(
-                    controller: _passwordController,
-                    borderBackgroundColor:
-                        ColorManager.primary.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(15.r),
-                    readOnly: true,
-                    backgroundColor: ColorManager.white,
-                    hint: 'Enter your password',
-                    label: 'Your password',
-                    isObscured: true,
-                    labelTextStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
-                    textStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
-                    suffixIcon: IconButton(
-                      icon: SvgPicture.asset(SvgAssets.edit),
-                      onPressed: () {
-                        _showChangePasswordDialog(context);
-                      },
-                    ),
-                    textInputType: TextInputType.text,
-                    validation: AppValidators.validatePassword,
-                  ),
-                  SizedBox(height: 14.h),
-                  BuildTextField(
-                    controller: _mobileController,
-                    borderBackgroundColor:
-                        ColorManager.primary.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(15.r),
-                    readOnly: _isMobileReadOnly,
-                    backgroundColor: ColorManager.white,
-                    hint: 'Enter your mobile no.',
-                    label: 'Your mobile number',
-                    labelTextStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
-                    textStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
-                    suffixIcon: IconButton(
-                      icon: _isMobileReadOnly
-                          ? SvgPicture.asset(SvgAssets.edit)
-                          : Icon(Icons.check_circle, color: ColorManager.primary),
-                      onPressed: () {
-                        setState(() {
-                          if (!_isMobileReadOnly) {
-                            _viewModel.updateUserData(
-                              phone: _mobileController.text,
-                            );
-                          }
-                          _isMobileReadOnly = !_isMobileReadOnly;
-                        });
-                      },
-                    ),
-                    textInputType: TextInputType.phone,
-                    validation: AppValidators.validatePhoneNumber,
-                  ),
-                  SizedBox(height: 14.h),
-                  BuildTextField(
-                    controller: _addressController,
-                    borderBackgroundColor:
-                        ColorManager.primary.withValues(alpha: .4),
-                    borderRadius: BorderRadius.circular(15.r),
-                    readOnly: _isAddressReadOnly,
-                    backgroundColor: ColorManager.white,
-                    hint: 'Enter your address',
-                    label: 'Your Address',
-                    labelTextStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s18.sp),
-                    textStyle: getMediumStyle(
-                        color: ColorManager.darkBlue, fontSize: FontSize.s16.sp),
-                    suffixIcon: IconButton(
-                      icon: _isAddressReadOnly
-                          ? SvgPicture.asset(SvgAssets.edit)
-                          : Icon(Icons.check_circle, color: ColorManager.primary),
-                      onPressed: () {
-                        setState(() {
-                          if (!_isAddressReadOnly) {
-                            _viewModel.addAddress(
-                              details: _addressController.text,
-                              phone: _mobileController.text,
-                            );
-                          }
-                          _isAddressReadOnly = !_isAddressReadOnly;
-                        });
-                      },
-                    ),
-                    textInputType: TextInputType.streetAddress,
-                    validation: AppValidators.validateFullName,
                   ),
                   SizedBox(height: 20.h),
                   SizedBox(

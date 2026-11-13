@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -84,6 +85,22 @@ class AccountViewModel extends Cubit<AccountStates> {
         updatedUser: currentUser,
       ));
       emit(AccountLoadedState(user: currentUser, addresses: addresses));
+    } on DioException catch (e) {
+      String message = 'Failed to update profile';
+      if (e.response?.data != null) {
+        final data = e.response!.data;
+        if (data is Map<String, dynamic>) {
+          message = data['message']?.toString() ??
+              data['error']?.toString() ??
+              data['errors']?.toString() ??
+              message;
+        } else if (data is String && data.isNotEmpty) {
+          message = data;
+        }
+      } else if (e.message != null && e.message!.isNotEmpty) {
+        message = e.message!;
+      }
+      emit(UpdateUserDataErrorState(errorMessage: message));
     } catch (e) {
       emit(UpdateUserDataErrorState(errorMessage: e.toString()));
     }
