@@ -22,12 +22,16 @@ class BuildTextField extends StatefulWidget {
     this.backgroundColor,
     this.hintTextStyle,
     this.labelTextStyle,
+    this.textStyle,
     this.cursorColor,
     this.readOnly = false,
     this.validation,
     this.onTap,
     this.maxLines,
-    this.prefixIcon, this.borderBackgroundColor, this.suffixIcon,
+    this.prefixIcon,
+    this.borderBackgroundColor,
+    this.suffixIcon,
+    this.borderRadius,
   });
 
   final TextEditingController? controller;
@@ -42,11 +46,13 @@ class BuildTextField extends StatefulWidget {
   final Color? borderBackgroundColor;
   final TextStyle? hintTextStyle;
   final TextStyle? labelTextStyle;
+  final TextStyle? textStyle;
   final Color? cursorColor;
   final bool readOnly;
   final int? maxLines;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final BorderRadius? borderRadius;
   final String? Function(String?)? validation;
   final void Function()? onTap;
 
@@ -79,9 +85,9 @@ class _BuildTextFieldState extends State<BuildTextField> {
           margin: const EdgeInsets.only(top: AppMargin.m5),
           decoration: BoxDecoration(
             color: widget.backgroundColor ??
-                ColorManager.darkGrey.withOpacity(.15),
-            borderRadius: BorderRadius.circular(AppSize.s8),
-            border: Border.all(color: widget.borderBackgroundColor ?? ColorManager.transparent )
+                ColorManager.darkGrey.withValues(alpha: .15),
+            borderRadius: widget.borderRadius ?? BorderRadius.circular(AppSize.s8),
+            border: Border.all(color: widget.borderBackgroundColor ?? ColorManager.transparent)
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: TextFormField(
@@ -89,8 +95,9 @@ class _BuildTextFieldState extends State<BuildTextField> {
             controller: widget.controller,
             focusNode: widget.focusNode,
             readOnly: widget.readOnly,
-            style: getMediumStyle(color: ColorManager.black)
-                .copyWith(fontSize: FontSize.s18.sp),
+            style: widget.textStyle ??
+                getMediumStyle(color: ColorManager.black)
+                    .copyWith(fontSize: FontSize.s18.sp),
             obscureText: hidden,
             keyboardType: widget.textInputType,
             obscuringCharacter: '*',
@@ -121,23 +128,24 @@ class _BuildTextFieldState extends State<BuildTextField> {
               contentPadding: const EdgeInsets.all(AppPadding.p12),
               hintText: widget.hint,
               prefixIcon: widget.prefixIcon,
-              suffixIcon: widget.isObscured
-                  ? IconButton(
-                      onPressed: () {
-                        setState(
-                          () {
-                            hidden = !hidden;
+              suffixIcon: widget.suffixIcon ??
+                  (widget.isObscured
+                      ? IconButton(
+                          onPressed: () {
+                            setState(
+                              () {
+                                hidden = !hidden;
+                              },
+                            );
                           },
-                        );
-                      },
-                      iconSize: AppSize.s24,
-                      splashRadius: AppSize.s1,
-                      isSelected: !hidden,
-                      color: widget.cursorColor,
-                      selectedIcon: const Icon(Icons.remove_red_eye_rounded),
-                      icon: SvgPicture.asset(SvgAssets.eye),
-                    )
-                  : widget.suffixIcon,
+                          iconSize: AppSize.s24,
+                          splashRadius: AppSize.s1,
+                          isSelected: !hidden,
+                          color: widget.cursorColor,
+                          selectedIcon: const Icon(Icons.remove_red_eye_rounded),
+                          icon: SvgPicture.asset(SvgAssets.eye),
+                        )
+                      : null),
               hintStyle: widget.hintTextStyle ??
                   getRegularStyle(color: ColorManager.grey)
                       .copyWith(fontSize: 18.sp),

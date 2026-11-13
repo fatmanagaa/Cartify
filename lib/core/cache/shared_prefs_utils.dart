@@ -61,4 +61,44 @@ class SharedPrefsUtils {
     final token = getToken();
     return token != null && token.isNotEmpty;
   }
+
+  static const String _userNameKey = 'user_name';
+  static const String _userEmailKey = 'user_email';
+  static const String _userPhoneKey = 'user_phone';
+
+  /// Save User info
+  static Future<bool> saveUser({
+    String? name,
+    String? email,
+    String? phone,
+  }) async {
+    if (name != null && name.isNotEmpty) await saveData(key: _userNameKey, value: name);
+    if (email != null && email.isNotEmpty) await saveData(key: _userEmailKey, value: email);
+    if (phone != null && phone.isNotEmpty) await saveData(key: _userPhoneKey, value: phone);
+    return true;
+  }
+
+  /// Retrieve User info
+  static String? getUserName() {
+    final name = getData(key: _userNameKey);
+    return name is String && name.isNotEmpty ? name : null;
+  }
+
+  static String? getUserEmail() {
+    final email = getData(key: _userEmailKey);
+    return email is String && email.isNotEmpty ? email : null;
+  }
+
+  static String? getUserPhone() {
+    final phone = getData(key: _userPhoneKey);
+    return phone is String && phone.isNotEmpty ? phone : null;
+  }
+
+  /// Delete User info
+  static Future<bool> deleteUser() async {
+    await removeData(key: _userNameKey);
+    await removeData(key: _userEmailKey);
+    await removeData(key: _userPhoneKey);
+    return true;
+  }
 }

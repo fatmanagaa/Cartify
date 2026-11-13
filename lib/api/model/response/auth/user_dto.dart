@@ -9,11 +9,14 @@ class UserDto {
   final String? email;
   @JsonKey(name: "role")
   final String? role;
+  @JsonKey(name: "phone")
+  final String? phone;
 
   UserDto ({
     this.name,
     this.email,
     this.role,
+    this.phone,
   });
 
   factory UserDto.fromJson(Map<String, dynamic> json) {

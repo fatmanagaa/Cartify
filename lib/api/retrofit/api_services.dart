@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/api/model/request/account/add_address_request_dto.dart';
+import 'package:ecommerce_app/api/model/request/account/change_password_request_dto.dart';
+import 'package:ecommerce_app/api/model/request/account/update_user_data_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/auth/login/login_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/auth/register/register_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/cart/add/add_cart_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/cart/put/count_request_dto.dart';
 import 'package:ecommerce_app/api/model/request/wishlist/add_product_to_wishlist_request_dto.dart';
+import 'package:ecommerce_app/api/model/response/account/addresses_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/auth/auth_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/cart/get/get_cart_response_dto.dart';
 import 'package:ecommerce_app/api/model/response/product/product_response_dto.dart';
@@ -83,6 +87,37 @@ abstract class ApiServices {
 
   @GET(ApiEndpoints.wishlist)
   Future<GetWishlistDto> getWishlist(
+    @Header('token') String token,
+  );
+
+  // ---------- Account ----------
+  @PUT(ApiEndpoints.updateMe)
+  Future<AuthResponseDto> updateUserData(
+    @Body() UpdateUserDataRequestDto request,
+    @Header('token') String token,
+  );
+
+  @PUT(ApiEndpoints.changeMyPassword)
+  Future<AuthResponseDto> changePassword(
+    @Body() ChangePasswordRequestDto request,
+    @Header('token') String token,
+  );
+
+  // ---------- Addresses ----------
+  @GET(ApiEndpoints.addresses)
+  Future<AddressesResponseDto> getAddresses(
+    @Header('token') String token,
+  );
+
+  @POST(ApiEndpoints.addresses)
+  Future<AddressesResponseDto> addAddress(
+    @Body() AddAddressRequestDto request,
+    @Header('token') String token,
+  );
+
+  @DELETE(ApiEndpoints.removeAddress)
+  Future<AddressesResponseDto> deleteAddress(
+    @Path('addressId') String addressId,
     @Header('token') String token,
   );
 }
