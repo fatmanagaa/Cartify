@@ -263,6 +263,6 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 **[Your Name]**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourusername)
-- Email: your.email@example.com
+- GitHub: [@yourusername](https://github.com/fatmanagaa)
+- LinkedIn: [Your Name](https://www.linkedin.com/in/fatma-gomaa-52b776280/)
+- Email: fatmanaga43@gmail.com
