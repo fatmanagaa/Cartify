@@ -11,7 +11,7 @@ class SplashViewModel extends Cubit<SplashStates> {
 
   Future<void> checkAutoLogin() async {
     emit(SplashLoadingState());
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 5));
     final token = await _getTokenUseCase.invoke();
     if (token != null && token.isNotEmpty) {
       emit(AuthenticatedState());

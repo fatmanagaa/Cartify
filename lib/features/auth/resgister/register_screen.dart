@@ -85,7 +85,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       child: Scaffold(
         backgroundColor: AppColors.primaryColor,
-        body: SingleChildScrollView(
+        body: SafeArea(
+          child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -214,6 +215,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

@@ -12,6 +12,8 @@ import '../../features/auth/login/sign_in_screen.dart';
 import '../../features/auth/resgister/register_screen.dart';
 import 'app_routes.dart';
 
+import '../widget/custom_app_bar.dart';
+
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: Routes.splashScreen,
@@ -88,9 +90,12 @@ abstract class AppRouter {
         },
       ),
     ],
-    errorBuilder: (context, state) => Scaffold(
-      appBar: AppBar(title: const Text('No Route Found')),
-      body: const Center(child: Text('No Route Found')),
+    errorBuilder: (context, state) => const Scaffold(
+      appBar: CustomAppBar(
+        title: 'No Route Found',
+        showSearchAndCart: false,
+      ),
+      body: Center(child: Text('No Route Found')),
     ),
   );
 }

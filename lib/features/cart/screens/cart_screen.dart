@@ -15,6 +15,8 @@ import '../widgets/cart_item_widget.dart';
 import '../widgets/custom_snack_bar.dart';
 import '../widgets/total_price_and_checkout_botton.dart';
 
+import '../../../core/widget/custom_app_bar.dart';
+
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
@@ -34,29 +36,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Cart',
-          style: getMediumStyle(fontSize: 20, color: ColorManager.textColor),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: ImageIcon(
-              AssetImage(IconsAssets.icSearch),
-              color: ColorManager.primary,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: ImageIcon(
-              AssetImage(IconsAssets.icCart),
-              color: ColorManager.primary,
-            ),
-          ),
-        ],
-      ),
+      appBar: const CustomAppBar(title: 'Cart'),
       body: BlocConsumer<CartScreenViewModel, CartStates>(
         bloc: viewModel,
         listener: (context, state) {

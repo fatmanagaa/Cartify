@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/core/di/di.dart';
 import 'package:ecommerce_app/core/routes_manager/app_routes.dart';
-import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_app/core/widget/main_error_widget.dart';
 import 'package:ecommerce_app/core/widget/main_loading_widget.dart';
@@ -21,6 +20,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
+
+import '../../../../core/widget/custom_app_bar.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({
@@ -53,30 +54,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Product Details',
-          style: getMediumStyle(color: ColorManager.appBarTitleColor)
-              .copyWith(fontSize: 20.sp),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: ImageIcon(
-              AssetImage(IconsAssets.icSearch),
-              color: ColorManager.primary,
-            ),
-          ),
-          IconButton(
-            onPressed: () => context.pushNamed(Routes.cartRouteName),
-            icon: Icon(
-              Icons.shopping_cart_outlined,
-              color: ColorManager.primary,
-            ),
-          ),
-        ],
-      ),
+      appBar: const CustomAppBar(title: 'Product Details'),
       body: BlocBuilder<ProductDetailsViewModel, ProductDetailsStates>(
         bloc: viewModel,
         builder: (context, state) {
