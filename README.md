@@ -12,8 +12,7 @@ A mobile e-commerce client built with Flutter, following Clean Architecture, BLo
 
 ## Demo
 
-[![Watch Demo](https://img.shields.io/badge/▶_Watch-Demo_Video-red?style=for-the-badge)](PUT_VIDEO_LINK_HERE)
-
+Demo video: [Watch here](https://drive.google.com/file/d/1da0R7rsZynWMlrIPDsQEWd4Occvtp6qp/view?usp=sharing)
 APK download: coming soon
 
 ---
