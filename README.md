@@ -13,6 +13,7 @@ A mobile e-commerce client built with Flutter, following Clean Architecture, BLo
 ## Demo
 
 Demo video: [Watch here](https://drive.google.com/file/d/1da0R7rsZynWMlrIPDsQEWd4Occvtp6qp/view?usp=sharing)
+
 APK download: coming soon
 
 ---
