@@ -1,6 +1,6 @@
-# Ecommerce App
+# Cartify
 
-A production-ready mobile e-commerce client built with Flutter, demonstrating Clean Architecture, BLoC pattern, and REST API integration.
+A mobile e-commerce client built with Flutter, following Clean Architecture, BLoC/Cubit, and REST API integration.
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-3.8+-0175C2?logo=dart)
@@ -10,15 +10,23 @@ A production-ready mobile e-commerce client built with Flutter, demonstrating Cl
 
 ---
 
+## Demo
+
+Demo video: coming soon
+APK download: coming soon
+
+---
+
 ## Table of Contents
 
+- [Demo](#demo)
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
+- [Key Decisions](#key-decisions)
 - [Getting Started](#getting-started)
 - [Future Improvements](#future-improvements)
-- [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
 
@@ -26,50 +34,14 @@ A production-ready mobile e-commerce client built with Flutter, demonstrating Cl
 
 ## Features
 
-- **Authentication & Session Management**
-  - User registration and login with form validation.
-  - Persistent auth tokens saved in local storage (`SharedPreferences`).
-  - Auto-login check on app splash launch.
-  - Token injection via Dio interceptors for authenticated API endpoints.
-  - Secure account sign-out and session clearance.
-
-- **Home Dashboard & Exploration**
-  - Interactive promotional banner carousel with page indicators.
-  - Dynamic category list horizontal scroll.
-  - Brand showcase items.
-  - Best-selling and featured product showcase.
-
-- **Categories & Subcategories**
-  - Category selection view with subcategory side-navigation.
-  - Direct filtering of products by category and subcategory.
-
-- **Product Listing & Filtering**
-  - Responsive grid layout displaying product cards with image, price, and rating.
-  - Real-time product search.
-  - Quick action to toggle items in wishlist.
-  - Direct add-to-cart functionality from product list cards.
-
-- **Product Details**
-  - Detailed product screen with image gallery.
-  - Expandable product description view.
-  - Quantity selection counter with real-time price updates.
-  - Color and variant selection support.
-
-- **Shopping Cart**
-  - Cart overview listing items with updated counts and price summaries.
-  - Quantity controls (increment/decrement) per item.
-  - Swipe-to-delete item actions via slidable list items.
-  - Order subtotal calculation.
-
-- **Wishlist**
-  - Personal favorite items list.
-  - Toggle items in/out of wishlist.
-  - Quick add-to-cart option from wishlist items.
-
-- **User Profile & Account Settings**
-  - Profile details display.
-  - Delivery address management (viewing, adding, removing addresses).
-  - Password change options.
+- **Authentication & Session Management**: User registration, login, password recovery, session sign-out, and auto-login splash launch check.
+- **Home Dashboard & Exploration**: Interactive promotional banner carousel, category listings, brand showcase, and featured products.
+- **Categories & Subcategories Navigation**: Category browsing with subcategory filtering and side navigation.
+- **Product Listing & Search**: Responsive grid layout with real-time product search, ratings, pricing, and quick wishlist/cart actions.
+- **Product Details View**: Comprehensive product detail view with image gallery, expandable description, variant options, and quantity selection.
+- **Shopping Cart**: Shopping cart management with price calculations, quantity controls, and slidable item deletion.
+- **Wishlist Management**: Personal favorite items list with toggle support and quick add-to-cart functionality.
+- **User Profile & Account Settings**: User details display, delivery address management (add, view, remove), and password change options.
 
 ---
 
@@ -79,36 +51,47 @@ A production-ready mobile e-commerce client built with Flutter, demonstrating Cl
   <table>
     <tr>
       <td align="center">
-        <img src="screenshots/Splash%20Screen.png" width="200" alt="Splash Screen"/><br/>
+        <img src="screenshots/splash_screen.png" width="200" alt="Splash Screen"/><br/>
         <sub>Splash Screen</sub>
       </td>
       <td align="center">
-        <img src="screenshots/HomeTab.png" width="200" alt="Home Screen"/><br/>
+        <img src="screenshots/login_screen.png" width="200" alt="Login Screen"/><br/>
+        <sub>Login Screen</sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/register_screen.png" width="200" alt="Register Screen"/><br/>
+        <sub>Register Screen</sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/home_screen.png" width="200" alt="Home Screen"/><br/>
         <sub>Home Screen</sub>
       </td>
       <td align="center">
-        <img src="screenshots/sub%20category%20screen.png" width="200" alt="Categories Screen"/><br/>
-        <sub>Categories & Subcategories</sub>
-      </td>
-      <td align="center">
-        <img src="screenshots/product%20screen.png" width="200" alt="Product Screen"/><br/>
-        <sub>Product Listing</sub>
+        <img src="screenshots/sub_category_screen.png" width="200" alt="Categories Screen"/><br/>
+        <sub>Subcategories Screen</sub>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <img src="screenshots/wishlist%20screen.png" width="200" alt="Wishlist Screen"/><br/>
-        <sub>Wishlist Screen</sub>
+        <img src="screenshots/product_screen.png" width="200" alt="Product Screen"/><br/>
+        <sub>Product Listing</sub>
       </td>
       <td align="center">
-        <img src="screenshots/cart%20screen.png" width="200" alt="Cart Screen"/><br/>
+        <img src="screenshots/product_details_screen.png" width="200" alt="Product Details Screen"/><br/>
+        <sub>Product Details</sub>
+      </td>
+      <td align="center">
+        <img src="screenshots/cart_screen.png" width="200" alt="Cart Screen"/><br/>
         <sub>Shopping Cart</sub>
       </td>
       <td align="center">
-        <img src="screenshots/acccount%20screen.png" width="200" alt="Account Screen"/><br/>
-        <sub>Account & Profile</sub>
+        <img src="screenshots/wishlist_screen.png" width="200" alt="Wishlist Screen"/><br/>
+        <sub>Wishlist Screen</sub>
       </td>
-      <td align="center"></td>
+      <td align="center">
+        <img src="screenshots/profile_screen.png" width="200" alt="Profile Screen"/><br/>
+        <sub>Profile Screen</sub>
+      </td>
     </tr>
   </table>
 </div>
@@ -122,12 +105,12 @@ A production-ready mobile e-commerce client built with Flutter, demonstrating Cl
 | **Framework** | Flutter (`>=3.3.0`) | Cross-platform UI toolkit |
 | **Language** | Dart (`^3.8.0`) | Primary programming language |
 | **State Management** | `flutter_bloc` (`^9.1.1`), `bloc` (`^9.2.1`) | Cubit-based state management |
-| **Networking** | `dio` (`^5.11.0`), `retrofit` (`^4.10.0`), `pretty_dio_logger` | REST API requests, interceptors, and network logging |
+| **Networking** | `dio` (`^5.11.0`), `retrofit` (`^4.10.0`), `pretty_dio_logger` (`^1.4.0`) | REST API requests, interceptors, and network logging |
 | **Dependency Injection** | `get_it` (`^9.3.0`), `injectable` (`^3.0.0`) | Service locator and compile-time dependency injection |
 | **Navigation** | `go_router` (`^17.5.0`) | Declarative routing and navigation |
 | **Local Storage** | `shared_preferences` (`^2.5.6`) | Persistent key-value storage for tokens and user sessions |
-| **UI & Layout** | `flutter_screenutil`, `cached_network_image`, `carousel_slider_plus`, `smooth_page_indicator`, `flutter_slidable`, `flutter_svg`, `google_fonts`, `readmore_flutter`, `auto_size_text` | Screen responsiveness, caching, image sliders, custom fonts, expandable text, slidable lists |
-| **Code Generation** | `build_runner`, `retrofit_generator`, `json_serializable`, `injectable_generator` | Code generation for JSON serialization, API clients, and DI |
+| **UI & Layout** | `flutter_screenutil`, `cached_network_image`, `carousel_slider_plus`, `smooth_page_indicator`, `flutter_slidable`, `flutter_svg`, `google_fonts` (`^8.2.1`), `readmore_flutter` (`^1.1.3`), `auto_size_text` | Screen responsiveness, caching, image sliders, custom fonts, expandable text, slidable lists |
+| **Code Generation** | `build_runner` (`^2.15.1`), `retrofit_generator` (`^10.2.9`), `json_serializable` (`^6.14.1`), `injectable_generator` (`^3.0.2`) | Code generation for JSON serialization, API clients, and DI |
 
 ---
 
@@ -151,46 +134,56 @@ This project follows **Clean Architecture** to ensure maintainability, testabili
                ┌────────────────────────┐
                │       Data Layer       │
                │ (Repositories, DTOs)   │
-               └────────────────────────┘
+               └───────────┴────────────┘
 ```
 
-- **Presentation Layer**: Handles UI layouts, user events, and view states using Cubit view models and GoRouter navigation.
-- **Domain Layer**: Contains business entities, repository contracts, and use cases. Completely framework-agnostic.
-- **Data Layer**: Implements domain repository interfaces using remote REST data sources (Retrofit/Dio) and local caching (SharedPreferences), mapping DTO responses to domain entities.
+- **Presentation Layer**: Resides in `lib/features/`, handling UI layouts, user events, and view states using Cubit view models and GoRouter navigation.
+- **Domain Layer**: Resides in `lib/domain/`, containing business entities, repository contracts, and use cases. Completely framework-agnostic.
+- **Data Layer**: Split between `lib/api/` (DTOs, Retrofit REST API interface, Dio client, data mappers, and remote/local data source implementations) and `lib/data/` (data source interface contracts and repository implementations).
 
 ### Folder Structure
 
 ```text
 lib/
-├── api/                      # REST endpoints, DTO models, Mappers, Retrofit services & Dio interceptors
-│   ├── data_source/          # Remote and Local data source implementations
+├── api/                      # Remote & local data source implementations, DTOs, Retrofit client, Dio config & mappers
+│   ├── data_source/          # Data source implementations (local & remote)
 │   ├── dio/                  # Dio client instance and DI setup
 │   ├── mapper/               # DTO to Entity data mappers
-│   ├── model/                # Request & Response DTOs
+│   ├── model/                # Request & Response DTOs, API endpoints
 │   └── retrofit/             # Retrofit API interface definitions
 ├── core/                     # Shared utilities, theme, route configuration, and reusable widgets
+│   ├── api_states/           # API state management wrappers
 │   ├── cache/                # SharedPreferences helper wrapper
 │   ├── di/                   # GetIt & Injectable dependency injection configuration
 │   ├── exceptions/           # Custom exception definitions
 │   ├── routes_manager/       # GoRouter definitions and route paths
 │   ├── utils/                # Colors, text styles, and assets definitions
-│   └── widget/               # Reusable UI components (AppBars, buttons, text fields)
-├── data/                     # Repository interfaces and concrete repository implementations
-│   ├── data_source/          # Remote & Local data source contracts
+│   └── widget/               # Reusable UI components
+├── data/                     # Repository implementations and data source contracts
+│   ├── data_source/          # Data source interface contracts (local & remote)
 │   └── repository/           # Data layer repository implementations
 ├── domain/                   # Pure business logic layer
 │   ├── entities/             # Core domain models
-│   ├── repository/           # Repository interfaces
+│   ├── repository/           # Abstract repository interfaces
 │   └── usecases/             # Application use cases
-├── features/                 # Modular feature presentation components and Cubits
+├── features/                 # Presentation layer (UI screens, widgets, and Cubits)
 │   ├── auth/                 # Sign In and Registration screens & logic
 │   ├── cart/                 # Shopping Cart screen and cart state management
 │   ├── main_layout/          # Bottom navigation tabs (Home, Categories, Wishlist, Profile)
-│   ├── product_details/      # Detailed product screen and widgets
-│   ├── products_screen/      # Product listing screen
+│   ├── product_details/      # Detailed product screen and logic
+│   ├── products_screen/      # Product listing screen and filtering logic
 │   └── splash/               # Splash screen and authentication state check
 └── main.dart                 # Application entry point
 ```
+
+---
+
+## Key Decisions
+
+- **Cubit (over full BLoC)**: Selected for state management to eliminate event mapping boilerplate; methods directly trigger state changes via functions, keeping UI state predictable and straightforward.
+- **GoRouter**: Used for declarative routing and deep linking, providing clean navigation and parameter passing across features.
+- **Retrofit with Dio**: Combines Retrofit's compile-time REST client generation with Dio's flexible HTTP handling, including interceptors for logging and auth token handling.
+- **GetIt with Injectable**: Provides compile-time dependency injection to decouple presentation, domain, and data layers cleanly without manual service registration boilerplate.
 
 ---
 
@@ -202,11 +195,16 @@ lib/
 - [Dart SDK](https://dart.dev/get-started) (`^3.8.0`)
 - IDE: Android Studio, VS Code, or IntelliJ IDEA with Flutter plugins installed.
 
+### API Configuration
+
+This application consumes a public third-party REST API and the backend was not developed as part of this project.
+- Base URL: `https://ecommerce.routemisr.com/api/v1/` (configured in `lib/api/model/api_constants/api_endpoints.dart`).
+
 ### Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/[Your-Username]/ecommerce-app-final-design.git
+   git clone https://github.com/fatmanagaa/ecommerce-app-final-design.git
    cd ecommerce-app-final-design
    ```
 
@@ -220,10 +218,7 @@ lib/
    dart run build_runner build --delete-conflicting-outputs
    ```
 
-4. **API Configuration:**
-   - Default backend Base URL: `https://ecommerce.routemisr.com/api/v1/` configured in `lib/api/model/api_constants/api_endpoints.dart`.
-
-5. **Run the application:**
+4. **Run the application:**
    ```bash
    flutter run
    ```
@@ -238,18 +233,7 @@ lib/
 - [ ] Offline caching and offline mode support.
 - [ ] Multi-language support and internationalization (i18n).
 - [ ] Dark theme mode toggle.
-
----
-
-## Contributing
-
-Contributions are welcome! Please follow these steps to contribute:
-
-1. Fork the project.
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+- [ ] Migrate token storage from SharedPreferences to flutter_secure_storage.
 
 ---
 
@@ -261,8 +245,8 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## Author
 
-**[Your Name]**
+**Fatma Gomaa**
 
-- GitHub: [@yourusername](https://github.com/fatmanagaa)
-- LinkedIn: [Your Name](https://www.linkedin.com/in/fatma-gomaa-52b776280/)
+- GitHub: [@fatmanagaa](https://github.com/fatmanagaa)
+- LinkedIn: [Fatma Gomaa](https://www.linkedin.com/in/fatma-gomaa-52b776280/)
 - Email: fatmanaga43@gmail.com
