@@ -59,9 +59,15 @@ APK download: coming soon
         <sub>Login Screen</sub>
       </td>
       <td align="center">
+        <img src="screenshots/login_screen_2.png" width="200" alt="Login Screen 2"/><br/>
+        <sub>Login (Form)</sub>
+      </td>
+      <td align="center">
         <img src="screenshots/register_screen.png" width="200" alt="Register Screen"/><br/>
         <sub>Register Screen</sub>
       </td>
+    </tr>
+    <tr>
       <td align="center">
         <img src="screenshots/home_screen.png" width="200" alt="Home Screen"/><br/>
         <sub>Home Screen</sub>
@@ -70,8 +76,6 @@ APK download: coming soon
         <img src="screenshots/sub_category_screen.png" width="200" alt="Categories Screen"/><br/>
         <sub>Subcategories Screen</sub>
       </td>
-    </tr>
-    <tr>
       <td align="center">
         <img src="screenshots/product_screen.png" width="200" alt="Product Screen"/><br/>
         <sub>Product Listing</sub>
@@ -79,6 +83,12 @@ APK download: coming soon
       <td align="center">
         <img src="screenshots/product_details_screen.png" width="200" alt="Product Details Screen"/><br/>
         <sub>Product Details</sub>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="screenshots/product_details_screen_2.png" width="200" alt="Product Details 2"/><br/>
+        <sub>Product Details View</sub>
       </td>
       <td align="center">
         <img src="screenshots/cart_screen.png" width="200" alt="Cart Screen"/><br/>
